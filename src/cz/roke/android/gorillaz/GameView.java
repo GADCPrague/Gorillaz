@@ -6,11 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 public class GameView extends View implements TimerUpdatable {
 
@@ -20,7 +18,7 @@ public class GameView extends View implements TimerUpdatable {
 	
 	public boolean up, down, left, right, fire;
 	
-	public Gorilka gorilka1 = new Gorilka(100, 100);
+	public Gorilka gorilka1;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -39,7 +37,7 @@ public class GameView extends View implements TimerUpdatable {
 		Log.d(TAG, "init");
 		ga = (GorillazActivity) context;
 		
-		b = BitmapFactory.decodeResource(context.getResources(), R.drawable.donk);
+		gorilka1 = new Gorilka(100, 100, context.getResources());
 		
 		setFocusable(true);
 	
@@ -59,16 +57,14 @@ public class GameView extends View implements TimerUpdatable {
 		p.setColor(Color.RED);
 		canvas.drawRect(g1.getX(), g1.getY(), g1.getRight(), g1.getBottom(), p);
 		
-		p.setColor(Color.GREEN);
-		canvas.drawRect(gorilka1.getX(), gorilka1.getY(), gorilka1.getRight(), gorilka1.getBottom(), p);
+		
+		gorilka1.draw(canvas, p);
 		
 		p.setColor(Color.YELLOW);
 		if ( g1.isCollision(gorilka1) == true ) {
 			canvas.drawText("KOLIZE !!!", 20, 20, p);
 		}
 
-		
-		canvas.drawBitmap(b, 10, 10, p);
 	}
 
 	@Override
