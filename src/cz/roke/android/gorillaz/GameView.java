@@ -58,21 +58,34 @@ public class GameView extends View implements TimerUpdatable {
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		ga = (GorillazActivity) context;
+		this.context = context;
 	}
 
 	public GameView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init(context);
+		ga = (GorillazActivity) context;
+		this.context = context;
 	}
 
+	private int width2, height2;
+	
+	@Override
+	public void onSizeChanged(int w, int h, int oldW, int oldH)
+	{
+		if (((oldW == 0 && oldH == 0) && height2==0))
+		{
+			width2 = w;
+			height2 = h;
+			init();
+		}
+	}
+	
 	/*
 	 * Inicialize game.
 	 */
-	private void init(Context context) {
+	private void init() {
 		Log.d(TAG, "init");
-		ga = (GorillazActivity) context;
-		this.context = context;
 
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
 		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
