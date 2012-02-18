@@ -23,7 +23,7 @@ public class GameView extends View implements TimerUpdatable {
 	
 	private LinkedList<Koule> balls = new LinkedList<Koule>();
 	public Mapa mapa;
-	public Gorilka gorilka1;
+	public Gorilka gorilka1, gorilka2;
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -44,8 +44,9 @@ public class GameView extends View implements TimerUpdatable {
 		
 		
 		mapa = new Mapa(context.getResources(), R.drawable.kolize);
-		
+
 		gorilka1 = new Gorilka(100, 100, context.getResources());
+		gorilka2 = new Gorilka(200, 200, context.getResources());
 		
 		balls.add(new Koule(20, 20, GorillazActivity.RIGHT));
 		
@@ -62,7 +63,7 @@ public class GameView extends View implements TimerUpdatable {
 	}
 
 	public void fireB() {
-		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due));
+		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due));
 	}
 	
 	@Override
@@ -76,9 +77,7 @@ public class GameView extends View implements TimerUpdatable {
 		
 		mapa.draw(canvas, p);
 		gorilka1.draw(canvas, p);
-		
-		
-		canvas.drawBitmap(b, 10, 10, p);
+		gorilka2.draw(canvas, p);
 		
 		for (Koule ball : balls) {
 			ball.draw(canvas);
@@ -88,6 +87,7 @@ public class GameView extends View implements TimerUpdatable {
 	@Override
 	public void timerUpdate() {
 
+		// Player 1
 		if (up == true )
 			gorilka1.moveUp();
 		else if (down == true)
@@ -99,6 +99,19 @@ public class GameView extends View implements TimerUpdatable {
 		
 		if (fire == true)
 			gorilka1.fire();
+		
+		// Player 2
+		if (upB == true )
+			gorilka2.moveUp();
+		else if (downB == true)
+			gorilka2.moveDown();
+		else if (leftB == true)
+			gorilka2.moveLeft();
+		else if (rightB == true)
+			gorilka2.moveRight();
+		
+		if (fireB == true)
+			gorilka2.fire();
 		
 		for (Koule ball : balls) {
 			ball.update();
