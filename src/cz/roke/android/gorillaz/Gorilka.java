@@ -25,9 +25,9 @@ public class Gorilka extends GameObject {
 
 	public Bitmap actualPic;
 	
-	public boolean nabito;
-	
 	public int fireTime = 0;
+	
+	public Koule nabitaKoule = null;
 	
 	public Gorilka(int x, int y) {
 		setX(x);
@@ -35,7 +35,7 @@ public class Gorilka extends GameObject {
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
 		
-		nabito = false;
+		nabitaKoule = null;
 		
 		// TODO Na zacatku vpravu
 		due = GorillazActivity.RIGHT;
@@ -86,9 +86,10 @@ public class Gorilka extends GameObject {
 	}
 	
 	public void fire() {
-		if (nabito == true) {
-			GameView.balls.add(new Koule(x, y, due, this));
-			nabito = false;
+		if (nabitaKoule != null) {
+
+	
+			nabitaKoule = null;
 			fireTime = 0;
 		}
 	}
@@ -99,7 +100,6 @@ public class Gorilka extends GameObject {
 		fireTime ++;
 		if (fireTime >= RELOAD_TIME) {
 			fireTime = 0;
-			nabito = true;
 		}
 	}
 	

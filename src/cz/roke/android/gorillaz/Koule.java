@@ -19,11 +19,11 @@ public class Koule extends GameObject {
 
 	private Bitmap obrazek;
 
-	private boolean movement = true;
-
 	private Gorilka vlastnik;
+	
+	public boolean vystrelena;
 
-	public Koule(int x, int y, int move, Gorilka vlastnik) {
+	public Koule(int x, int y) {
 		setX(x);
 		setY(y);
 		setWidth(WIDTH);
@@ -32,7 +32,14 @@ public class Koule extends GameObject {
 		this.vlastnik = vlastnik;
 
 		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech);
-		this.move = move;
+
+		vystrelena = false;
+	}
+	
+	public void strel(Gorilka vlastnik) {
+		this.vlastnik = vlastnik;
+		vystrelena = true;
+		move = vlastnik.due;
 	}
 
 	public Koule(int x, int y, int width, int height) {
@@ -43,7 +50,7 @@ public class Koule extends GameObject {
 	}
 
 	public void update() {
-		if (movement == true) {
+		if (vystrelena == true) {
 
 			switch (move) {
 			case GorillazActivity.UP: {
@@ -89,9 +96,9 @@ public class Koule extends GameObject {
 		Gorilka gorilky[] = GameView.gorilkaArray;
 		
 		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
-			if (this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
-				movement = false;
+			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
 				GameView.gorilkaArray[i].respawn();
+				vystrelena = true;
 			}
 		}
 	}

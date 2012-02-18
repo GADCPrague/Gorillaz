@@ -61,6 +61,11 @@ public class GameView extends View implements TimerUpdatable {
 		gorilkaArray[1] = gorilka2;
 		
 		
+		for (int i = 0; i < 15; i ++) {
+			GameView.balls.add(new Koule((int)(Math.random() * 400 + 40), (int)(Math.random() * 250 + 40)));
+		}
+		
+		
 		setFocusable(true);
 		
 		if (ga.timer == null) {
