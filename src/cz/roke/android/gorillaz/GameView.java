@@ -39,6 +39,11 @@ public class GameView extends View implements TimerUpdatable {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
+		
+		if (isInEditMode()) {
+			return;
+		}
+		
 		Paint p = new Paint();
 		p.setColor(Color.RED);
 
