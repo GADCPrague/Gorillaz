@@ -18,6 +18,8 @@ public class GameView extends View implements TimerUpdatable {
 	
 	public boolean up, down, left, right, fire;
 	
+	public Mapa mapa;
+	
 	public Gorilka gorilka1;
 	
 	public GameView(Context context, AttributeSet attrs) {
@@ -37,6 +39,9 @@ public class GameView extends View implements TimerUpdatable {
 		Log.d(TAG, "init");
 		ga = (GorillazActivity) context;
 		
+		
+		mapa = new Mapa(context.getResources(), R.drawable.kolize);
+		
 		gorilka1 = new Gorilka(100, 100, context.getResources());
 		
 		setFocusable(true);
@@ -55,20 +60,11 @@ public class GameView extends View implements TimerUpdatable {
 		}
 		
 		Paint p = new Paint();
-		p.setColor(Color.RED);
-
-		Gorilka g1 = new Gorilka(88, 85, 100, 100);
-			
-		p.setColor(Color.RED);
-		canvas.drawRect(g1.getX(), g1.getY(), g1.getRight(), g1.getBottom(), p);
 		
-		
+		mapa.draw(canvas, p);
 		gorilka1.draw(canvas, p);
 		
-		p.setColor(Color.YELLOW);
-		if ( g1.isCollision(gorilka1) == true ) {
-			canvas.drawText("KOLIZE !!!", 20, 20, p);
-		}
+		
 
 	}
 
