@@ -19,14 +19,16 @@ public class GameView extends View implements TimerUpdatable {
 
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
-	private Bitmap palma;
 
-	private Context context;
+private Bitmap palma;
+	private Bitmap popredi;
+	
+	public static Context context;
 
 	public boolean up, down, left, right, fire;
 	public boolean upB, downB, leftB, rightB, fireB;
-
-	private LinkedList<Koule> balls = new LinkedList<Koule>();
+	
+	public static LinkedList<Koule> balls = new LinkedList<Koule>();
 
 	public Gorilka gorilka1, gorilka2;
 	public static Gorilka gorilkaArray[];
@@ -65,11 +67,12 @@ public class GameView extends View implements TimerUpdatable {
 		this.context = context;
 
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
-		palma = BitmapFactory.decodeResource(context.getResources(), R.drawable.palma);
-
-		gorilka1 = new Gorilka(100, 100, context.getResources());
-		gorilka2 = new Gorilka(200, 200, context.getResources());
-
+		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
+		
+		
+		gorilka1 = new Gorilka(100, 100);
+		gorilka2 = new Gorilka(200, 200);
+		
 		gorilkaArray = new Gorilka[2];
 		gorilkaArray[0] = gorilka1;
 		gorilkaArray[1] = gorilka2;
@@ -80,14 +83,6 @@ public class GameView extends View implements TimerUpdatable {
 			ga.timer = new Timer(30);
 		}
 		ga.timer.setAnimator(this);
-	}
-
-	public void fire() {
-		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due, context.getResources(), gorilka1));
-	}
-
-	public void fireB() {
-		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due, context.getResources(), gorilka2));
 	}
 
 	@Override
@@ -108,11 +103,7 @@ public class GameView extends View implements TimerUpdatable {
 			ball.draw(canvas, p);
 		}
 
-		canvas.drawBitmap(palma, -50, 150, p);
-		
-		p.setColor(Color.RED);
-		buttonUpB.draw(canvas, p);
-		//buttonDownB.draw(canvas, p);
+		canvas.drawBitmap(popredi, 0, 0, p);
 	}
 
 	@Override

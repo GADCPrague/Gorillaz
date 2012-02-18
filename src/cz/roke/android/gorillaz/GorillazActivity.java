@@ -157,11 +157,20 @@ public class GorillazActivity extends Activity {
 		});
 
 		Button butFire = (Button) findViewById(R.id.butFire);
-		butFire.setOnClickListener(new OnClickListener() {
+		butFire.setOnTouchListener(new OnTouchListener() {
 
 			@Override
-			public void onClick(View v) {
-				gameView.fire();
+			public boolean onTouch(View v, MotionEvent event) {
+
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					gameView.fire = true;
+				} else
+
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					gameView.fire = false;
+				}
+
+				return false;
 			}
 		});
 
@@ -244,11 +253,20 @@ public class GorillazActivity extends Activity {
 		});
 
 		Button butFireB = (Button) findViewById(R.id.butFireB);
-		butFireB.setOnClickListener(new OnClickListener() {
+		butFireB.setOnTouchListener(new OnTouchListener() {
 
 			@Override
-			public void onClick(View v) {
-				gameView.fireB();
+			public boolean onTouch(View v, MotionEvent event) {
+
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					gameView.fireB = true;
+				} else
+
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					gameView.fireB = false;
+				}
+
+				return false;
 			}
 		});
 
