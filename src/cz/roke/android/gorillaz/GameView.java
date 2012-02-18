@@ -14,6 +14,8 @@ import android.view.View;
 
 public class GameView extends View implements TimerUpdatable {
 
+	public static Mapa mapa;
+	
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
 	private Bitmap b;
@@ -22,7 +24,6 @@ public class GameView extends View implements TimerUpdatable {
 	public boolean upB, downB, leftB, rightB, fireB;
 	
 	private LinkedList<Koule> balls = new LinkedList<Koule>();
-	public Mapa mapa;
 	public Gorilka gorilka1, gorilka2;
 	
 	public GameView(Context context, AttributeSet attrs) {

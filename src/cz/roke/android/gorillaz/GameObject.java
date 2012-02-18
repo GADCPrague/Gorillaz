@@ -1,19 +1,29 @@
 package cz.roke.android.gorillaz;
 
+import android.util.Log;
+
 
 public class GameObject {
 	
-	public final int OX = 0;
+	public static final int OX = 0;
 	
-	public final int OY = 1;
+	public static final int OY = 1;
 	
-	public final int LH = 0;
+	public static final int LH = 0;
 	
-	public final int PH = 1;
+	public static final int PH = 1;
 	
-	public final int LD = 2;
+	public static final int LD = 2;
 	
-	public final int PD = 3;
+	public static final int PD = 3;
+	
+	public static final int UP = 0;
+	
+	public static final int DOWN = 1;
+	
+	public static final int LEFT = 2;
+	
+	public static final int RIGHT = 3;
 	
 	protected int x;
 	
@@ -22,9 +32,6 @@ public class GameObject {
 	protected int width;
 	
 	protected int height;
-	
-	public int kolizniBody[][];
-	
 	
 	public int getRight() {
 		return x + width;
@@ -98,6 +105,51 @@ public class GameObject {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public boolean canUp() {
+		
+		int px = ((getRight() - x) + x) / 2;
+		int py = y - 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canDown() {
+		int px = ((getRight() - x) + x) / 2;
+		int py = getBottom() + 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canLeft() {
+		int py = ((getBottom() - y) + y) / 2;
+		int px = x - 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canRight() {
+		int py = ((getBottom() - y) + y) / 2;
+		int px = getRight() + 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
 	}
 	
 }
