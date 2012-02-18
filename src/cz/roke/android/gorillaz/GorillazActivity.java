@@ -24,6 +24,7 @@ public class GorillazActivity extends Activity {
 	public Timer timer = null;
 
 	public Gorilka gorilka1 = new Gorilka(100, 100);
+	GameView gameView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -35,24 +36,37 @@ public class GorillazActivity extends Activity {
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-		Log.i("", "key :" + keyCode);
-
-		if (keyCode == UP)
-			gorilka1.moveUp();
-		else if (keyCode == DOWN)
-			gorilka1.moveDown();
+		Log.i("", "key down :" + keyCode);
+	
+		if (keyCode == UP) 
+			gameView.up = true;
+		else if (keyCode == DOWN) 
+			gameView.down = true;
 		else if (keyCode == LEFT)
-			gorilka1.moveLeft();
+			gameView.left = true;
 		else if (keyCode == RIGHT)
-			gorilka1.moveRight();
-
+			gameView.right = true;
+		else if (keyCode == FIRE)
+			gameView.fire = true;
+		
 		return super.onKeyDown(keyCode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-
+		Log.i("", "key up :" + keyCode);
+		
+		if (keyCode == UP) 
+			gameView.up = false;
+		else if (keyCode == DOWN) 
+			gameView.down = false;
+		else if (keyCode == LEFT)
+			gameView.left = false;
+		else if (keyCode == RIGHT)
+			gameView.right = false;
+		else if (keyCode == FIRE)
+			gameView.fire = false;
+		
 		return super.onKeyUp(keyCode, event);
 	}
 
@@ -94,11 +108,12 @@ public class GorillazActivity extends Activity {
 
 	@Override
 	protected void onStart() {
+		super.onStart();
+		gameView = (GameView) findViewById(R.id.GameView);
+		
 		if (timer == null) {
 			timer = new Timer(30);
 		}
-		super.onStart();
-
 		timer.start();
 	}
 
