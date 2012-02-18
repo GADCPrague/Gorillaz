@@ -1,10 +1,8 @@
 package cz.roke.android.gorillaz;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
@@ -15,7 +13,6 @@ public class Koule extends GameObject {
 
 	public static final int RYCHLOST = 5;
 
-	private Paint paint;
 	private int move;
 
 	private Bitmap obrazek;
