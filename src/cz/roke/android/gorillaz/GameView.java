@@ -48,7 +48,7 @@ public class GameView extends View implements TimerUpdatable {
 	private GameObject buttonDownA = new GameObject(SI, OKRAJ - SI, SI, SI);
 	private GameObject buttonLeftA = new GameObject(0, OKRAJ - SI * 2, SI, SI);
 	private GameObject buttonRightA = new GameObject(SI * 2, OKRAJ - SI * 2, SI, SI);
-	private GameObject buttonFireA = new GameObject(SI, OKRAJ - SI, SI, SI);
+	private GameObject buttonFireA = new GameObject(OKRAJ_W - SI, OKRAJ - SI, SI, SI);
 	
 	private GameObject buttonUpB = new GameObject(OKRAJ_W - SI * 2, 0, SI, SI);
 	private GameObject buttonDownB = new GameObject(OKRAJ_W - SI * 2, SI * 2, SI, SI);
@@ -58,21 +58,34 @@ public class GameView extends View implements TimerUpdatable {
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		ga = (GorillazActivity) context;
+		this.context = context;
 	}
 
 	public GameView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init(context);
+		ga = (GorillazActivity) context;
+		this.context = context;
 	}
 
+	private int width2, height2;
+	
+	@Override
+	public void onSizeChanged(int w, int h, int oldW, int oldH)
+	{
+		if (((oldW == 0 && oldH == 0) && height2==0))
+		{
+			width2 = w;
+			height2 = h;
+			init();
+		}
+	}
+	
 	/*
 	 * Inicialize game.
 	 */
-	private void init(Context context) {
+	private void init() {
 		Log.d(TAG, "init");
-		ga = (GorillazActivity) context;
-		this.context = context;
 
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
 		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
@@ -231,12 +244,7 @@ public class GameView extends View implements TimerUpdatable {
 							if (buttonRightA.isInside(x, y)) {
 								right = false;
 								continue;
-							} else
-								
-								if (buttonFireA.isInside(x, y)) {
-									gorilka1.fire();
-									continue;
-								}
+							}
 				
 				if (buttonUpB.isInside(x, y)) {
 					upB = false;
@@ -256,12 +264,7 @@ public class GameView extends View implements TimerUpdatable {
 							if (buttonRightB.isInside(x, y)) {
 								rightB = false;
 								continue;
-							} else
-								
-								if (buttonFireA.isInside(x, y)) {
-									gorilka2.fire();
-									continue;
-								}
+							}
 			}
 
 			if (buttonUpA.isInside(x, y)) {
@@ -278,7 +281,11 @@ public class GameView extends View implements TimerUpdatable {
 						
 						if (buttonRightA.isInside(x, y)) {
 							right = true;
-						}
+						} else
+							
+							if (buttonFireA.isInside(x, y)) {
+								gorilka1.fire();
+							}
 			
 			if (buttonUpB.isInside(x, y)) {
 				upB = true;
@@ -294,7 +301,11 @@ public class GameView extends View implements TimerUpdatable {
 						
 						if (buttonRightB.isInside(x, y)) {
 							rightB = true;
-						}
+						} else
+							
+							if (buttonFireB.isInside(x, y)) {
+								gorilka2.fire();
+							}
 		}
 
 		sb.append("]");

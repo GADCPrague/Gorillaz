@@ -5,8 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class Gorilka extends GameObject {
+	
+	private static final String TAG = "Gorilka";
 	
 	public static final int WIDTH = 40;
 	
@@ -108,6 +111,8 @@ public class Gorilka extends GameObject {
 	}
 	
 	public void fire() {
+		Log.d(TAG, "Fire!");
+		
 		if (nabitaKoule != null) {
 
 			nabitaKoule.strel(this);
