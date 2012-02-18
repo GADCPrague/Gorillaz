@@ -11,6 +11,7 @@
 
 	<!-- Joystick #1 -->
 	<RelativeLayout
+android:visibility="gone"
 	    android:layout_alignParentBottom="true"
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
@@ -20,7 +21,7 @@
 		    android:background="@drawable/arrow_up"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_alignLeft="@id/butDown"
+		    android:layout_alignLeft="@+id/butDown"
 		    android:text="" />
 
 		<Button
@@ -61,6 +62,7 @@
 
 	<!-- Joystick #2 -->
 	<RelativeLayout
+android:visibility="gone"
 	    android:layout_alignParentTop="true"
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
@@ -99,7 +101,7 @@
 
 		<Button
 		    android:id="@+id/butFireB"
-		    android:background="@drawable/arrow_fire"
+		    android:background="@drawable/arrow_fire_reverse"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentRight="true"
