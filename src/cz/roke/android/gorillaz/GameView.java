@@ -20,12 +20,12 @@ public class GameView extends View implements TimerUpdatable {
 	private GorillazActivity ga;
 	private Bitmap palma;
 	
-	private Context context;
+	public static Context context;
 
 	public boolean up, down, left, right, fire;
 	public boolean upB, downB, leftB, rightB, fireB;
 	
-	private LinkedList<Koule> balls = new LinkedList<Koule>();
+	public static LinkedList<Koule> balls = new LinkedList<Koule>();
 
 	public Gorilka gorilka1, gorilka2;
 	public static Gorilka gorilkaArray[];
@@ -53,8 +53,8 @@ public class GameView extends View implements TimerUpdatable {
 		palma = BitmapFactory.decodeResource(context.getResources(), R.drawable.palma);
 		
 		
-		gorilka1 = new Gorilka(100, 100, context.getResources());
-		gorilka2 = new Gorilka(200, 200, context.getResources());
+		gorilka1 = new Gorilka(100, 100);
+		gorilka2 = new Gorilka(200, 200);
 		
 		gorilkaArray = new Gorilka[2];
 		gorilkaArray[0] = gorilka1;
@@ -69,14 +69,6 @@ public class GameView extends View implements TimerUpdatable {
 		ga.timer.setAnimator(this);
 	}
 
-	public void fire() {
-		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due, context.getResources(), gorilka1 ));
-	}
-
-	public void fireB() {
-		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due, context.getResources(), gorilka2));
-	}
-	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		

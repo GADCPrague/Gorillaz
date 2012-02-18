@@ -23,7 +23,7 @@ public class Koule extends GameObject {
 
 	private Gorilka vlastnik;
 
-	public Koule(int x, int y, int move, Resources resources, Gorilka vlastnik) {
+	public Koule(int x, int y, int move, Gorilka vlastnik) {
 		setX(x);
 		setY(y);
 		setWidth(WIDTH);
@@ -31,7 +31,7 @@ public class Koule extends GameObject {
 		
 		this.vlastnik = vlastnik;
 
-		obrazek = BitmapFactory.decodeResource(resources, R.drawable.orech);
+		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech);
 		this.move = move;
 	}
 

@@ -23,19 +23,23 @@ public class Gorilka extends GameObject {
 
 	public Bitmap actualPic;
 	
-	public Gorilka(int x, int y, Resources resources) {
+	public boolean nabito;
+	
+	public Gorilka(int x, int y) {
 		setX(x);
 		setY(y);
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
 		
+		nabito = false;
+		
 		// TODO Na zacatku vpravu
 		due = GorillazActivity.RIGHT;
 
-		picUp = BitmapFactory.decodeResource(resources, R.drawable.up);
-		picDown = BitmapFactory.decodeResource(resources, R.drawable.down);
-		picLeft = BitmapFactory.decodeResource(resources, R.drawable.left);
-		picRight = BitmapFactory.decodeResource(resources, R.drawable.right);
+		picUp = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up);
+		picDown = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down);
+		picLeft = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left);
+		picRight = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right);
 		
 		actualPic = picRight;
 		
@@ -78,7 +82,7 @@ public class Gorilka extends GameObject {
 	}
 	
 	public void fire() {
-	
+		GameView.balls.add(new Koule(x, y, due, this));
 	}
 	
 	public void draw(Canvas canvas, Paint paint) {
