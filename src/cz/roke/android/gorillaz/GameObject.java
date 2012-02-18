@@ -23,6 +23,8 @@ public class GameObject {
 	
 	protected int height;
 	
+	public int kolizniBody[][];
+	
 	
 	public int getRight() {
 		return x + width;

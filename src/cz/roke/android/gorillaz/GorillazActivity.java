@@ -12,8 +12,8 @@ import android.widget.Button;
 
 public class GorillazActivity extends Activity {
 
-	private static final String TAG = GorillazActivity.class.getName();
-
+	private static final String TAG = "GorillazActivity";
+	
 	public static final int UP = 19;
 	public static final int DOWN = 20;
 	public static final int LEFT = 21;
