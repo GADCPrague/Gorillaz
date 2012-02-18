@@ -1,26 +1,28 @@
 package cz.roke.android.gorillaz;
 
+import java.util.LinkedList;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Picture;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 public class GameView extends View implements TimerUpdatable {
 
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
 	private Bitmap b;
-	
+
 	public boolean up, down, left, right, fire;
+	public boolean upB, downB, leftB, rightB, fireB;
 	
 	public Gorilka gorilka1 = new Gorilka(100, 100);
+	private LinkedList<Koule> balls = new LinkedList<Koule>();
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -41,14 +43,24 @@ public class GameView extends View implements TimerUpdatable {
 		
 		b = BitmapFactory.decodeResource(context.getResources(), R.drawable.donk);
 		
+		balls.add(new Koule(20, 20, GorillazActivity.RIGHT));
+		
 		setFocusable(true);
-	
+		
 		if (ga.timer == null) {
 			ga.timer = new Timer(30);
 		}
 		ga.timer.setAnimator(this);
 	}
 
+	public void fire() {
+		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due));
+	}
+
+	public void fireB() {
+		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due));
+	}
+	
 	@Override
 	protected void onDraw(Canvas canvas) {
 		
@@ -74,6 +86,10 @@ public class GameView extends View implements TimerUpdatable {
 
 		
 		canvas.drawBitmap(b, 10, 10, p);
+		
+		for (Koule ball : balls) {
+			ball.draw(canvas);
+		}
 	}
 
 	@Override
@@ -91,6 +107,9 @@ public class GameView extends View implements TimerUpdatable {
 		if (fire == true)
 			gorilka1.fire();
 		
+		for (Koule ball : balls) {
+			ball.update();
+		}
 		
 		this.postInvalidate();
 	}

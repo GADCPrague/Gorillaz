@@ -15,13 +15,13 @@ public class GameObject {
 	
 	public final int PD = 3;
 	
-	private int x;
+	protected int x;
 	
-	private int y;
+	protected int y;
 	
-	private int width;
+	protected int width;
 	
-	private int height;
+	protected int height;
 	
 	
 	public int getRight() {
