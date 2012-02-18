@@ -50,7 +50,7 @@
 		    android:background="@drawable/arrow_fire"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_below="@id/butRight"
+		    android:layout_alignParentRight="true"
 		    android:text="" />
 	</RelativeLayout>
 
@@ -95,7 +95,7 @@
 		    android:background="@drawable/arrow_fire"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_below="@id/butRightB"
+		    android:layout_alignParentRight="true"
 		    android:text="" />
 	</RelativeLayout>
 	
