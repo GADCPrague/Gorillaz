@@ -22,6 +22,7 @@ public class Koule extends GameObject {
 	private Gorilka vlastnik;
 	
 	public boolean vystrelena;
+	public boolean nabita;
 
 	public Koule(int x, int y) {
 		setX(x);
@@ -33,6 +34,7 @@ public class Koule extends GameObject {
 
 		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech);
 
+		nabita = false;
 		vystrelena = false;
 	}
 	
@@ -96,9 +98,13 @@ public class Koule extends GameObject {
 		Gorilka gorilky[] = GameView.gorilkaArray;
 		
 		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
-			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
-				GameView.gorilkaArray[i].respawn();
+			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && gorilky[i] != vlastnik ) {
+				gorilky[i].respawn();
 				vystrelena = true;
+			}
+			
+			if (this.vystrelena == false && this.nabita == false && this.isCollision(gorilky[i]) && gorilky[i].nabitaKoule == null) {
+				gorilky[i].vemKouli(this);
 			}
 		}
 	}
@@ -109,7 +115,8 @@ public class Koule extends GameObject {
 			paint = new Paint();
 		}
 
-		canvas.drawBitmap(obrazek, x, y, paint);
+		if (nabita == false)
+			canvas.drawBitmap(obrazek, x, y, paint);
 
 	}
 }

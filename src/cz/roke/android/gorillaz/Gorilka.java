@@ -103,6 +103,12 @@ public class Gorilka extends GameObject {
 		}
 	}
 	
+	public void vemKouli(Koule koule) {
+		nabitaKoule = koule;
+		koule.nabita = true;
+		koule.vystrelena = false;
+	}
+	
 	public void respawn() {
 		x = (int)(Math.random() * 430 + 40);
 		y = (int)(Math.random() * 270 + 40);
