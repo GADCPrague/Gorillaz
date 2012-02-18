@@ -47,7 +47,7 @@ public class Koule extends GameObject {
 
 			switch (move) {
 			case GorillazActivity.UP: {
-				int px = ((getRight() - x) + x) / 2;
+				int px = (getRight() - x) / 2 + x;
 				int py = y - 3;
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
 
@@ -56,7 +56,7 @@ public class Koule extends GameObject {
 				break;
 			}
 			case GorillazActivity.DOWN: {
-				int px = ((getRight() - x) + x) / 2;
+				int px = (getRight() - x) / 2 + x;
 				int py = getBottom() + 3;
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
 
@@ -65,7 +65,7 @@ public class Koule extends GameObject {
 				break;
 			}
 			case GorillazActivity.LEFT: {
-				int py = ((getBottom() - y) + y) / 2;
+				int py = getBottom() - y / 2 + y;
 				int px = x - 3;
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
@@ -75,7 +75,7 @@ public class Koule extends GameObject {
 				break;
 			}
 			case GorillazActivity.RIGHT: {
-				int py = ((getBottom() - y) + y) / 2;
+				int py = (getBottom() - y) / 2 + y;
 				int px = getRight() + 3;
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {

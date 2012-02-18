@@ -14,6 +14,8 @@ public class Gorilka extends GameObject {
 	
 	public static final int MOVE = 2;
 	
+	public static final int RELOAD_TIME = 10;
+	
 	public int due;
 	 
 	public Bitmap picUp;
@@ -24,6 +26,8 @@ public class Gorilka extends GameObject {
 	public Bitmap actualPic;
 	
 	public boolean nabito;
+	
+	public int fireTime = 0;
 	
 	public Gorilka(int x, int y) {
 		setX(x);
@@ -82,12 +86,21 @@ public class Gorilka extends GameObject {
 	}
 	
 	public void fire() {
-		GameView.balls.add(new Koule(x, y, due, this));
-		nabito = false;
+		if (nabito == true) {
+			GameView.balls.add(new Koule(x, y, due, this));
+			nabito = false;
+			fireTime = 0;
+		}
 	}
 	
 	public void draw(Canvas canvas, Paint paint) {
 		canvas.drawBitmap(actualPic, getX(), getY(), paint);
+		
+		fireTime ++;
+		if (fireTime >= RELOAD_TIME) {
+			fireTime = 0;
+			nabito = true;
+		}
 	}
 	
 	public void respawn() {

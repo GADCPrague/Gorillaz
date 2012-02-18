@@ -87,7 +87,7 @@ public class GameView extends View implements TimerUpdatable {
 			ball.draw(canvas, p);
 		}
 		
-		//canvas.drawBitmap(popredi, 0, 0, p);
+		canvas.drawBitmap(popredi, 0, 0, p);
 	}
 
 	@Override

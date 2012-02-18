@@ -18,7 +18,7 @@ public class Mapa {
 	}
 	
 	public void draw(Canvas canvas, Paint paint) {
-		canvas.drawBitmap(collisionMap, 0, 0, paint);
+		canvas.drawBitmap(pozadi, 0, 0, paint);
 	}
 	
 }
