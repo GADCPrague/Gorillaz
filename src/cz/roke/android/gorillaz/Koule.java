@@ -19,20 +19,32 @@ public class Koule extends GameObject {
 
 	private Bitmap obrazek;
 
-	private boolean movement = true;
-
 	private Gorilka vlastnik;
 
-	public Koule(int x, int y, int move, Gorilka vlastnik) {
+	public boolean vystrelena;
+	public boolean nabita;
+
+	public Koule(int x, int y) {
 		setX(x);
 		setY(y);
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
-		
+
 		this.vlastnik = vlastnik;
 
 		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech);
-		this.move = move;
+
+		nabita = false;
+		vystrelena = false;
+	}
+
+	public void strel(Gorilka vlastnik) {
+		this.vlastnik = vlastnik;
+		x = (vlastnik.getRight() - vlastnik.x) / 2 + vlastnik.x;
+		y = (vlastnik.getBottom() - vlastnik.y) / 2 + vlastnik.y;
+		vystrelena = true;
+		nabita = false;
+		move = vlastnik.due;
 	}
 
 	public Koule(int x, int y, int width, int height) {
@@ -43,14 +55,14 @@ public class Koule extends GameObject {
 	}
 
 	public void update() {
-		if (movement == true) {
+		if (vystrelena == true) {
 
 			switch (move) {
 			case GorillazActivity.UP: {
 				int px = (getRight() - x) / 2 + x;
 				int py = y - 3;
-				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					zastavSe();
 				} else
 					y -= RYCHLOST;
 				break;
@@ -58,8 +70,8 @@ public class Koule extends GameObject {
 			case GorillazActivity.DOWN: {
 				int px = (getRight() - x) / 2 + x;
 				int py = getBottom() + 3;
-				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					zastavSe();
 				} else
 					y += RYCHLOST;
 				break;
@@ -68,8 +80,8 @@ public class Koule extends GameObject {
 				int py = getBottom() - y / 2 + y;
 				int px = x - 3;
 
-				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					zastavSe();
 				} else
 					x -= RYCHLOST;
 				break;
@@ -77,23 +89,33 @@ public class Koule extends GameObject {
 			case GorillazActivity.RIGHT: {
 				int py = (getBottom() - y) / 2 + y;
 				int px = getRight() + 3;
-
-				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					zastavSe();
 				} else
 					x += RYCHLOST;
 				break;
 			}
 			}
 		}
-		
-		Gorilka gorilky[] = GameView.gorilkaArray;
-		
+
 		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
-			if (this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
-				movement = false;
+			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik) {
+				zastavSe();
 				GameView.gorilkaArray[i].respawn();
 			}
+
+			if (this.vystrelena == false && this.nabita == false && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i].nabitaKoule == null) {
+				GameView.gorilkaArray[i].vemKouli(this);
+			}
 		}
+		
+		
+	}
+
+	public void zastavSe() {
+		vystrelena = false;
+		nabita = false;
+		vlastnik = null;
 	}
 
 	public void draw(Canvas canvas, Paint paint) {
@@ -102,7 +124,8 @@ public class Koule extends GameObject {
 			paint = new Paint();
 		}
 
-		canvas.drawBitmap(obrazek, x, y, paint);
+		if (nabita == false)
+			canvas.drawBitmap(obrazek, x, y, paint);
 
 	}
 }
