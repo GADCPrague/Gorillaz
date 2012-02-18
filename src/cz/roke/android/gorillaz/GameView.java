@@ -19,6 +19,8 @@ public class GameView extends View implements TimerUpdatable {
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
 	private Bitmap palma;
+	
+	private Context context;
 
 	public boolean up, down, left, right, fire;
 	public boolean upB, downB, leftB, rightB, fireB;
@@ -42,7 +44,7 @@ public class GameView extends View implements TimerUpdatable {
 	private void init(Context context) {
 		Log.d(TAG, "init");
 		ga = (GorillazActivity) context;
-		
+		this.context = context;
 		
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
 		palma = BitmapFactory.decodeResource(context.getResources(), R.drawable.palma);
@@ -51,7 +53,7 @@ public class GameView extends View implements TimerUpdatable {
 		gorilka1 = new Gorilka(100, 100, context.getResources());
 		gorilka2 = new Gorilka(200, 200, context.getResources());
 		
-		balls.add(new Koule(20, 20, GorillazActivity.RIGHT));
+		balls.add(new Koule(20, 20, GorillazActivity.RIGHT, context.getResources()));
 		
 		setFocusable(true);
 		
@@ -62,11 +64,11 @@ public class GameView extends View implements TimerUpdatable {
 	}
 
 	public void fire() {
-		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due));
+		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due, context.getResources() ));
 	}
 
 	public void fireB() {
-		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due));
+		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due, context.getResources()));
 	}
 	
 	@Override
@@ -82,11 +84,11 @@ public class GameView extends View implements TimerUpdatable {
 		gorilka1.draw(canvas, p);
 		gorilka2.draw(canvas, p);
 		
-		canvas.drawBitmap(palma, -50, 100, p);
-		
 		for (Koule ball : balls) {
-			ball.draw(canvas);
+			ball.draw(canvas, p);
 		}
+		
+		canvas.drawBitmap(palma, -50, 150, p);
 	}
 
 	@Override
