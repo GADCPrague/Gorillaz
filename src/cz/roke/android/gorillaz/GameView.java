@@ -74,6 +74,7 @@ public class GameView extends View implements TimerUpdatable {
 	@Override
 	protected void onDraw(Canvas canvas) {
 		
+		// Log.d(TAG, getWidth() + "x" + getHeight());
 		if (isInEditMode()) {
 			return;
 		}
