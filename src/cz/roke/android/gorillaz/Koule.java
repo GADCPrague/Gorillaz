@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.Log;
 
 public class Koule extends GameObject {
 
@@ -62,10 +63,7 @@ public class Koule extends GameObject {
 				int px = (getRight() - x) / 2 + x;
 				int py = y - 1;
 				
-				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
-					zastavSe();
-					break;
-				}
+				
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
@@ -77,10 +75,7 @@ public class Koule extends GameObject {
 				int px = (getRight() - x) / 2 + x;
 				int py = getBottom() + 1;
 				
-				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
-					zastavSe();
-					break;
-				}
+				
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
@@ -92,10 +87,7 @@ public class Koule extends GameObject {
 				int py = getBottom() - y / 2 + y;
 				int px = x - 1;
 
-				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
-					zastavSe();
-					break;
-				}
+				Log.i("", "" + GameView.mapa.collisionMap.getWidth() + " " + GameView.mapa.collisionMap.getHeight() );
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
@@ -107,10 +99,7 @@ public class Koule extends GameObject {
 				int py = (getBottom() - y) / 2 + y;
 				int px = getRight() + 1;
 				
-				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
-					zastavSe();
-					break;
-				}
+			
 				
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
