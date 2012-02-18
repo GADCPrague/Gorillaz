@@ -3,17 +3,25 @@ package cz.roke.android.gorillaz;
 
 public class GameObject {
 	
-	public final int OX = 0;
+	public static final int OX = 0;
 	
-	public final int OY = 1;
+	public static final int OY = 1;
 	
-	public final int LH = 0;
+	public static final int LH = 0;
 	
-	public final int PH = 1;
+	public static final int PH = 1;
 	
-	public final int LD = 2;
+	public static final int LD = 2;
 	
-	public final int PD = 3;
+	public static final int PD = 3;
+	
+	public static final int UP = 0;
+	
+	public static final int DOWN = 1;
+	
+	public static final int LEFT = 2;
+	
+	public static final int RIGHT = 3;
 	
 	protected int x;
 	
@@ -22,9 +30,6 @@ public class GameObject {
 	protected int width;
 	
 	protected int height;
-	
-	public int kolizniBody[][];
-	
 	
 	public int getRight() {
 		return x + width;
