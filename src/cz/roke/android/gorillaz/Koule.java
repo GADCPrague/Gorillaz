@@ -60,7 +60,13 @@ public class Koule extends GameObject {
 			switch (move) {
 			case GorillazActivity.UP: {
 				int px = (getRight() - x) / 2 + x;
-				int py = y - 3;
+				int py = y - 1;
+				
+				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
+					zastavSe();
+					break;
+				}
+
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
 				} else
@@ -69,7 +75,13 @@ public class Koule extends GameObject {
 			}
 			case GorillazActivity.DOWN: {
 				int px = (getRight() - x) / 2 + x;
-				int py = getBottom() + 3;
+				int py = getBottom() + 1;
+				
+				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
+					zastavSe();
+					break;
+				}
+
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
 				} else
@@ -78,7 +90,12 @@ public class Koule extends GameObject {
 			}
 			case GorillazActivity.LEFT: {
 				int py = getBottom() - y / 2 + y;
-				int px = x - 3;
+				int px = x - 1;
+
+				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
+					zastavSe();
+					break;
+				}
 
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
@@ -88,7 +105,13 @@ public class Koule extends GameObject {
 			}
 			case GorillazActivity.RIGHT: {
 				int py = (getBottom() - y) / 2 + y;
-				int px = getRight() + 3;
+				int px = getRight() + 1;
+				
+				if (px <= 0 || py <= 0 || px >= 480 || py >= 320) {
+					zastavSe();
+					break;
+				}
+				
 				if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
 					zastavSe();
 				} else

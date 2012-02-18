@@ -22,6 +22,11 @@ public class Gorilka extends GameObject {
 	public Bitmap picDown;
 	public Bitmap picLeft;
 	public Bitmap picRight;
+	
+	public Bitmap picUpFull;
+	public Bitmap picDownFull;
+	public Bitmap picLeftFull;
+	public Bitmap picRightFull;
 
 	public Bitmap actualPic;
 	
@@ -45,6 +50,11 @@ public class Gorilka extends GameObject {
 		picLeft = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left);
 		picRight = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right);
 		
+		picUpFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up_full);
+		picDownFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down_full);
+		picLeftFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left_full);
+		picRightFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right_full);
+		
 		actualPic = picRight;
 		
 	}
@@ -55,7 +65,10 @@ public class Gorilka extends GameObject {
 		
 		setY(getY() - MOVE);
 		due = GorillazActivity.UP;
-		actualPic = picUp;
+		if (nabitaKoule == null)
+			actualPic = picUp;
+		else 
+			actualPic = picUpFull;
 	}
 	
 	public void moveDown() {
@@ -64,7 +77,10 @@ public class Gorilka extends GameObject {
 		
 		setY(getY() + MOVE);
 		due = GorillazActivity.DOWN;
-		actualPic = picDown;
+		if (nabitaKoule == null)
+			actualPic = picDown;
+		else 
+			actualPic = picDownFull;
 	}
 	
 	public void moveLeft() {
@@ -73,7 +89,10 @@ public class Gorilka extends GameObject {
 		
 		setX(getX() - MOVE);
 		due = GorillazActivity.LEFT;
-		actualPic = picLeft;
+		if (nabitaKoule == null)
+			actualPic = picLeft;
+		else 
+			actualPic = picLeftFull;
 	}
 	
 	public void moveRight() {
@@ -82,7 +101,10 @@ public class Gorilka extends GameObject {
 		
 		setX(getX() + MOVE);
 		due = GorillazActivity.RIGHT;
-		actualPic = picRight;
+		if (nabitaKoule == null)
+			actualPic = picRight;
+		else 
+			actualPic = picRightFull;
 	}
 	
 	public void fire() {
@@ -91,6 +113,16 @@ public class Gorilka extends GameObject {
 			nabitaKoule.strel(this);
 			nabitaKoule = null;
 			fireTime = 0;
+			
+			if (actualPic == picUpFull)
+				actualPic = picUp;
+			if (actualPic == picDownFull)
+				actualPic = picDown;
+			if (actualPic == picLeftFull)
+				actualPic = picLeft;
+			if (actualPic == picRightFull)
+				actualPic = picRight;
+			
 		}
 	}
 	

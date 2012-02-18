@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 public class GameView extends View implements TimerUpdatable {
 
@@ -20,7 +21,11 @@ public class GameView extends View implements TimerUpdatable {
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
 
-private Bitmap palma;
+	private Bitmap logo;
+
+	private int logoTime = 0;
+	
+	private Bitmap palma;
 	private Bitmap popredi;
 	
 	public static Context context;
@@ -36,20 +41,20 @@ private Bitmap palma;
 	// Oblasti pro joystick
 	private final int SI = 40;
 	private final int OKRAJ = 320;
-	private final int OKRAJ_W = 320;
+	private final int OKRAJ_W = 480;
 	
 	// TODO Zjistit okraj obrazovky a pocitat od nej
-	private GameObject buttonUpA = new GameObject(SI, OKRAJ - SI * 2, SI, SI);
+	private GameObject buttonUpA = new GameObject(SI, OKRAJ - SI * 3, SI, SI);
 	private GameObject buttonDownA = new GameObject(SI, OKRAJ - SI, SI, SI);
-	private GameObject buttonLeftA = new GameObject(0, OKRAJ - SI, SI, SI);
-	private GameObject buttonRightA = new GameObject(SI * 2, OKRAJ - SI, SI, SI);
-	private GameObject buttonFireA = new GameObject(OKRAJ_W - SI, OKRAJ - SI, SI, SI);
+	private GameObject buttonLeftA = new GameObject(0, OKRAJ - SI * 2, SI, SI);
+	private GameObject buttonRightA = new GameObject(SI * 2, OKRAJ - SI * 2, SI, SI);
+	private GameObject buttonFireA = new GameObject(SI, OKRAJ - SI, SI, SI);
 	
-	private GameObject buttonUpB = new GameObject(SI, 0, SI, SI);
-	private GameObject buttonDownB = new GameObject(SI, SI, SI, SI);
-	private GameObject buttonLeftB = new GameObject(0, 0, SI, SI);
-	private GameObject buttonRightB = new GameObject(SI * 2, 0, SI, SI);
-	private GameObject buttonFireB = new GameObject(OKRAJ_W - SI, 0, SI, SI);
+	private GameObject buttonUpB = new GameObject(OKRAJ_W - SI * 2, 0, SI, SI);
+	private GameObject buttonDownB = new GameObject(OKRAJ_W - SI * 2, SI * 2, SI, SI);
+	private GameObject buttonLeftB = new GameObject(OKRAJ_W - SI * 3, SI, SI, SI);
+	private GameObject buttonRightB = new GameObject(OKRAJ_W - SI, SI, SI, SI);
+	private GameObject buttonFireB = new GameObject(0, 0, SI, SI);
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -71,6 +76,7 @@ private Bitmap palma;
 
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
 		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
+		logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo);
 		
 		
 		gorilka1 = new Gorilka(100, 100);
@@ -126,11 +132,16 @@ private Bitmap palma;
 		buttonLeftB.draw(canvas, p);
 		buttonRightB.draw(canvas, p);
 		buttonFireB.draw(canvas, p);
+		
+		if (logoTime < 50 )
+			canvas.drawBitmap(logo, 0, 0, p);
 	}
 
 	@Override
 	public void timerUpdate() {
 
+		logoTime ++;
+		
 		// Player 1
 		if (up == true)
 			gorilka1.moveUp();
