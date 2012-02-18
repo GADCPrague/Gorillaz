@@ -1,77 +1,98 @@
 package cz.roke.android.gorillaz;
 
-import android.util.Log;
-
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 public class GameObject {
-	
+
 	public static final int OX = 0;
-	
+
 	public static final int OY = 1;
-	
+
 	public static final int LH = 0;
-	
+
 	public static final int PH = 1;
-	
+
 	public static final int LD = 2;
-	
+
 	public static final int PD = 3;
-	
+
 	public static final int UP = 0;
-	
+
 	public static final int DOWN = 1;
-	
+
 	public static final int LEFT = 2;
-	
+
 	public static final int RIGHT = 3;
-	
+
 	protected int x;
-	
+
 	protected int y;
-	
+
 	protected int width;
-	
+
 	protected int height;
+<<<<<<< HEAD
 	
 	private int bod[][] = new int[4][2];
 	
+=======
+
+	public GameObject() {
+
+	}
+
+	public GameObject(int x, int y, int w, int h) {
+		this.x = x;
+		this.y = y;
+		this.width = w;
+		this.height = h;
+	}
+
+>>>>>>> f590645bec6f2350f75f156b01df0a66c16b2e66
 	public int getRight() {
 		return x + width;
 	}
-	
+
 	public int getBottom() {
 		return y + height;
 	}
-	
+
 	public boolean isCollision(GameObject o) {
-		if ( isInObject(o) == true )
+		if (isInObject(o) == true)
 			return true;
-		
-		if ( o.isInObject(this) == true) 
+
+		if (o.isInObject(this) == true)
 			return true;
-		
+
 		return false;
 	}
-	
+
 	public boolean isInObject(GameObject o) {
+<<<<<<< HEAD
 		
+=======
+
+		int bod[][] = new int[4][2];
+
+>>>>>>> f590645bec6f2350f75f156b01df0a66c16b2e66
 		bod[LH][OX] = x;
 		bod[LH][OY] = y;
-	
+
 		bod[PH][OX] = getRight();
 		bod[PH][OY] = y;
-		
+
 		bod[LD][OX] = x;
 		bod[LD][OY] = getBottom();
-		
+
 		bod[PD][OX] = getRight();
 		bod[PD][OY] = getBottom();
-		
-		for (int i = 0; i < 4; i ++) {
-			if ( bod[i][OX] >= o.x && bod[i][OX] < o.getRight() && bod[i][OY] >= o.y && bod[i][OY] <= o.getBottom() )
+
+		for (int i = 0; i < 4; i++) {
+			if (bod[i][OX] >= o.x && bod[i][OX] < o.getRight() && bod[i][OY] >= o.y && bod[i][OY] <= o.getBottom())
 				return true;
 		}
-		
+
 		return false;
 	}
 
@@ -106,7 +127,7 @@ public class GameObject {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-	
+
 	public boolean canUp() {
 		
 		int px = (getRight() - x) / 2  + x;
@@ -114,42 +135,64 @@ public class GameObject {
 		
 		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
 			return false;
-		
-		
+
 		return true;
 	}
-	
+
 	public boolean canDown() {
 		int px = (getRight() - x) /2  + x;
 		int py = getBottom() + 3;
-		
 		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
 			return false;
-		
-		
+
 		return true;
 	}
-	
+
 	public boolean canLeft() {
 		int py = (getBottom() - y) /2  + y;
 		int px = x - 3;
 		
 		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
 			return false;
-		
-		
+
 		return true;
 	}
-	
+
 	public boolean canRight() {
 		int py = (getBottom() - y) / 2 + y;
 		int px = getRight() + 3;
 		
 		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
 			return false;
-		
-		
+
 		return true;
 	}
-	
+
+	/*
+	 * Return true if point is inside game object.
+	 */
+	public boolean isInside(int x, int y) {
+
+		if (x < this.x) {
+			return false;
+		}
+
+		if (x > this.x + this.width) {
+			return false;
+		}
+
+		if (y < this.y) {
+			return false;
+		}
+
+		if (y > this.y + this.height) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public void draw(Canvas c, Paint p) {
+		c.drawRect(x, y, x + width, y + height, p);
+	}
 }

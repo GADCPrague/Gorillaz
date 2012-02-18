@@ -11,22 +11,17 @@
 
 	<!-- Joystick #1 -->
 	<RelativeLayout
+android:visibility="gone"
 	    android:layout_alignParentBottom="true"
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
+
 		<Button
 		    android:id="@+id/butUp"
 		    android:background="@drawable/arrow_up"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:text="" />
-
-		<Button
-		    android:id="@+id/butDown"
-		    android:background="@drawable/arrow_down"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butUp"
+		    android:layout_alignLeft="@+id/butDown"
 		    android:text="" />
 
 		<Button
@@ -34,7 +29,16 @@
 		    android:background="@drawable/arrow_left"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butDown"
+		    android:layout_below="@id/butUp"
+		    android:text="" />
+
+		<Button
+		    android:id="@+id/butDown"
+		    android:background="@drawable/arrow_down"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/butUp"
+		    android:layout_toRightOf="@id/butLeft"
 		    android:text="" />
 
 		<Button
@@ -42,7 +46,8 @@
 		    android:background="@drawable/arrow_right"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butLeft"
+		    android:layout_below="@id/butUp"
+		    android:layout_toRightOf="@id/butDown"
 		    android:text="" />
 
 		<Button
@@ -51,35 +56,30 @@
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentRight="true"
+		    android:layout_below="@id/butUp"
 		    android:text="" />
 	</RelativeLayout>
 
 	<!-- Joystick #2 -->
 	<RelativeLayout
+android:visibility="gone"
 	    android:layout_alignParentTop="true"
 	    android:layout_width="wrap_content"
     	android:layout_height="wrap_content">
-		<Button
-		    android:id="@+id/butUpB"
-		    android:background="@drawable/arrow_up"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="" />
-
-		<Button
-		    android:id="@+id/butDownB"
-		    android:background="@drawable/arrow_down"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butUpB"
-		    android:text="" />
 
 		<Button
 		    android:id="@+id/butLeftB"
 		    android:background="@drawable/arrow_left"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butDownB"
+		    android:text="" />
+
+		<Button
+		    android:id="@+id/butUpB"
+		    android:background="@drawable/arrow_up"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_toRightOf="@id/butLeftB"
 		    android:text="" />
 
 		<Button
@@ -87,12 +87,21 @@
 		    android:background="@drawable/arrow_right"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
-		    android:layout_toRightOf="@id/butLeftB"
+		    android:layout_toRightOf="@id/butUpB"
+		    android:text="" />
+
+		<Button
+		    android:id="@+id/butDownB"
+		    android:background="@drawable/arrow_down"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_below="@id/butLeftB"
+		    android:layout_alignLeft="@id/butUpB"
 		    android:text="" />
 
 		<Button
 		    android:id="@+id/butFireB"
-		    android:background="@drawable/arrow_fire"
+		    android:background="@drawable/arrow_fire_reverse"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_alignParentRight="true"
