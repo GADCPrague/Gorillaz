@@ -26,7 +26,10 @@ public class GameView extends View implements TimerUpdatable {
 	public boolean upB, downB, leftB, rightB, fireB;
 	
 	private LinkedList<Koule> balls = new LinkedList<Koule>();
+
 	public Gorilka gorilka1, gorilka2;
+	public static Gorilka gorilkaArray[];
+	
 	
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -53,7 +56,10 @@ public class GameView extends View implements TimerUpdatable {
 		gorilka1 = new Gorilka(100, 100, context.getResources());
 		gorilka2 = new Gorilka(200, 200, context.getResources());
 		
-		balls.add(new Koule(20, 20, GorillazActivity.RIGHT, context.getResources()));
+		gorilkaArray = new Gorilka[2];
+		gorilkaArray[0] = gorilka1;
+		gorilkaArray[1] = gorilka2;
+		
 		
 		setFocusable(true);
 		
@@ -64,11 +70,11 @@ public class GameView extends View implements TimerUpdatable {
 	}
 
 	public void fire() {
-		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due, context.getResources() ));
+		balls.add(new Koule(gorilka1.x, gorilka1.y, gorilka1.due, context.getResources(), gorilka1 ));
 	}
 
 	public void fireB() {
-		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due, context.getResources()));
+		balls.add(new Koule(gorilka2.x, gorilka2.y, gorilka2.due, context.getResources(), gorilka2));
 	}
 	
 	@Override
