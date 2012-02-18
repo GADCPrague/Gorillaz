@@ -40,34 +40,38 @@ public class Gorilka extends GameObject {
 		actualPic = picRight;
 		
 	}
-	
-	public Gorilka(int x, int y, int width, int height) {
-		setX(x);
-		setY(y);
-		setWidth(width);
-		setHeight(height);
-	}
-	
 
 	public void moveUp() {
+		if (super.canUp() == false)
+			return;
+		
 		setY(getY() - MOVE);
 		due = GorillazActivity.UP;
 		actualPic = picUp;
 	}
 	
 	public void moveDown() {
+		if (super.canDown() == false)
+			return;
+		
 		setY(getY() + MOVE);
 		due = GorillazActivity.DOWN;
 		actualPic = picDown;
 	}
 	
 	public void moveLeft() {
+		if (super.canLeft() == false)
+			return;
+		
 		setX(getX() - MOVE);
 		due = GorillazActivity.LEFT;
 		actualPic = picLeft;
 	}
 	
 	public void moveRight() {
+		if (super.canRight() == false)
+			return;
+		
 		setX(getX() + MOVE);
 		due = GorillazActivity.RIGHT;
 		actualPic = picRight;

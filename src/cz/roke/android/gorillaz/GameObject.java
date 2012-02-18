@@ -1,5 +1,7 @@
 package cz.roke.android.gorillaz;
 
+import android.util.Log;
+
 
 public class GameObject {
 	
@@ -103,6 +105,51 @@ public class GameObject {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public boolean canUp() {
+		
+		int px = ((getRight() - x) + x) / 2;
+		int py = y - 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canDown() {
+		int px = ((getRight() - x) + x) / 2;
+		int py = getBottom() + 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canLeft() {
+		int py = ((getBottom() - y) + y) / 2;
+		int px = x - 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
+	}
+	
+	public boolean canRight() {
+		int py = ((getBottom() - y) + y) / 2;
+		int px = getRight() + 3;
+		
+		if ( GameView.mapa.collisionMap.getPixel(px, py) < -5 )
+			return false;
+		
+		
+		return true;
 	}
 	
 }
