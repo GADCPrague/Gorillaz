@@ -18,7 +18,7 @@ public class GameView extends View implements TimerUpdatable {
 	
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
-	private Bitmap b;
+	private Bitmap palma;
 
 	public boolean up, down, left, right, fire;
 	public boolean upB, downB, leftB, rightB, fireB;
@@ -44,8 +44,10 @@ public class GameView extends View implements TimerUpdatable {
 		ga = (GorillazActivity) context;
 		
 		
-		mapa = new Mapa(context.getResources(), R.drawable.kolize);
-
+		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
+		palma = BitmapFactory.decodeResource(context.getResources(), R.drawable.palma);
+		
+		
 		gorilka1 = new Gorilka(100, 100, context.getResources());
 		gorilka2 = new Gorilka(200, 200, context.getResources());
 		
@@ -79,6 +81,8 @@ public class GameView extends View implements TimerUpdatable {
 		mapa.draw(canvas, p);
 		gorilka1.draw(canvas, p);
 		gorilka2.draw(canvas, p);
+		
+		canvas.drawBitmap(palma, -50, 100, p);
 		
 		for (Koule ball : balls) {
 			ball.draw(canvas);
