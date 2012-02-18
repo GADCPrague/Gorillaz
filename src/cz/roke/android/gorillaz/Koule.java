@@ -81,7 +81,7 @@ public class Koule extends GameObject {
 				break;
 			}
 			case GorillazActivity.LEFT: {
-				int py = getBottom() - y / 2 + y;
+				int py = (getBottom() - y) / 2 + y;
 				int px = x - 1;
 
 				Log.i("", "" + GameView.mapa.collisionMap.getWidth() + " " + GameView.mapa.collisionMap.getHeight() );
