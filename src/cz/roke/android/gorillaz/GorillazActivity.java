@@ -1,7 +1,10 @@
 package cz.roke.android.gorillaz;
 
+import cz.roke.android.gorillaz.network.Communication;
+import cz.roke.android.gorillaz.network.ServerSide;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -9,12 +12,26 @@ import android.widget.Toast;
 
 public class GorillazActivity extends Activity {
 
+	private static final String TAG = GorillazActivity.class.getName();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.main);
 
-		debugStartGame();
+		// debugStartGame();
+		debugStartServer();
+	}
+
+	private ServerSide ss;
+
+	private void debugStartServer() {
+		if (ss == null) {
+			ss = new ServerSide();
+			ss.exec();
+		} else {
+			Log.i(TAG, "Server is already running!");
+		}
 	}
 
 	private void debugStartGame() {
