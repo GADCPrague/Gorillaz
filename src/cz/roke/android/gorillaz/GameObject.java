@@ -32,11 +32,11 @@ public class GameObject {
 	protected int width;
 
 	protected int height;
-<<<<<<< HEAD
+
 	
 	private int bod[][] = new int[4][2];
 	
-=======
+
 
 	public GameObject() {
 
@@ -49,7 +49,6 @@ public class GameObject {
 		this.height = h;
 	}
 
->>>>>>> f590645bec6f2350f75f156b01df0a66c16b2e66
 	public int getRight() {
 		return x + width;
 	}
@@ -69,13 +68,7 @@ public class GameObject {
 	}
 
 	public boolean isInObject(GameObject o) {
-<<<<<<< HEAD
-		
-=======
 
-		int bod[][] = new int[4][2];
-
->>>>>>> f590645bec6f2350f75f156b01df0a66c16b2e66
 		bod[LH][OX] = x;
 		bod[LH][OY] = y;
 
