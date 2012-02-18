@@ -2,9 +2,9 @@ package cz.roke.android.gorillaz;
 
 public class Gorilka extends GameObject {
 	
-	public static final int WIDTH = 32;
+	public static final int WIDTH = 40;
 	
-	public static final int HEIGHT = 32;
+	public static final int HEIGHT = 40;
 	
 	public static final int MOVE = 2;
 	
@@ -39,5 +39,8 @@ public class Gorilka extends GameObject {
 		setX(getX() + MOVE);
 	}
 	
+	public void fire() {
+	
+	}
 	
 }
