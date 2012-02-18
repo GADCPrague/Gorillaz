@@ -88,7 +88,7 @@ public class Gorilka extends GameObject {
 	public void fire() {
 		if (nabitaKoule != null) {
 
-	
+			nabitaKoule.strel(this);
 			nabitaKoule = null;
 			fireTime = 0;
 		}

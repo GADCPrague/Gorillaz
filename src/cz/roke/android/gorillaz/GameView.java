@@ -61,7 +61,7 @@ public class GameView extends View implements TimerUpdatable {
 		gorilkaArray[1] = gorilka2;
 		
 		
-		for (int i = 0; i < 15; i ++) {
+		for (int i = 0; i < 10; i ++) {
 			GameView.balls.add(new Koule((int)(Math.random() * 400 + 40), (int)(Math.random() * 250 + 40)));
 		}
 		
@@ -85,12 +85,14 @@ public class GameView extends View implements TimerUpdatable {
 		Paint p = new Paint();
 		
 		mapa.draw(canvas, p);
-		gorilka1.draw(canvas, p);
-		gorilka2.draw(canvas, p);
-		
+	
 		for (Koule ball : balls) {
 			ball.draw(canvas, p);
 		}
+		
+		gorilka1.draw(canvas, p);
+		gorilka2.draw(canvas, p);
+	
 		
 		canvas.drawBitmap(popredi, 0, 0, p);
 	}
