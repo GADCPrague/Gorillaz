@@ -85,4 +85,9 @@ public class Gorilka extends GameObject {
 		canvas.drawBitmap(actualPic, getX(), getY(), paint);
 	}
 	
+	public void respawn() {
+		x = (int)(Math.random() * 430 + 40);
+		y = (int)(Math.random() * 270 + 40);
+	}
+	
 }

@@ -19,11 +19,17 @@ public class Koule extends GameObject {
 
 	private Bitmap obrazek;
 
-	public Koule(int x, int y, int move, Resources resources) {
+	private boolean movement = true;
+
+	private Gorilka vlastnik;
+
+	public Koule(int x, int y, int move, Resources resources, Gorilka vlastnik) {
 		setX(x);
 		setY(y);
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
+		
+		this.vlastnik = vlastnik;
 
 		obrazek = BitmapFactory.decodeResource(resources, R.drawable.orech);
 		this.move = move;
@@ -37,44 +43,54 @@ public class Koule extends GameObject {
 	}
 
 	public void update() {
-		switch (move) {
-		case GorillazActivity.UP: {
-			int px = ((getRight() - x) + x) / 2;
-			int py = y - 3;
-			if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+		if (movement == true) {
 
-			} else
-				y -= RYCHLOST;
-			break;
+			switch (move) {
+			case GorillazActivity.UP: {
+				int px = ((getRight() - x) + x) / 2;
+				int py = y - 3;
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+
+				} else
+					y -= RYCHLOST;
+				break;
+			}
+			case GorillazActivity.DOWN: {
+				int px = ((getRight() - x) + x) / 2;
+				int py = getBottom() + 3;
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+
+				} else
+					y += RYCHLOST;
+				break;
+			}
+			case GorillazActivity.LEFT: {
+				int py = ((getBottom() - y) + y) / 2;
+				int px = x - 3;
+
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+
+				} else
+					x -= RYCHLOST;
+				break;
+			}
+			case GorillazActivity.RIGHT: {
+				int py = ((getBottom() - y) + y) / 2;
+				int px = getRight() + 3;
+
+				if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
+				} else
+					x += RYCHLOST;
+				break;
+			}
+			}
 		}
-		case GorillazActivity.DOWN: {
-			int px = ((getRight() - x) + x) / 2;
-			int py = getBottom() + 3;
-			if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-
-			} else
-				y += RYCHLOST;
-			break;
-		}
-		case GorillazActivity.LEFT: {
-			int py = ((getBottom() - y) + y) / 2;
-			int px = x - 3;
-
-			if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-
-			} else
-				x -= RYCHLOST;
-			break;
-		}
-		case GorillazActivity.RIGHT: {
-			int py = ((getBottom() - y) + y) / 2;
-			int px = getRight() + 3;
-
-			if (GameView.mapa.collisionMap.getPixel(px, py) < -5) {
-			} else
-				x += RYCHLOST;
-			break;
-		}
+		
+		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
+			if (this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
+				movement = false;
+				GameView.gorilkaArray[i].respawn();
+			}
 		}
 	}
 
