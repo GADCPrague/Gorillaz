@@ -9,12 +9,18 @@
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent" />
 
+	<!-- Joystick -->
 	<Button
-	    android:id="@+id/moje"
+	    android:id="@+id/butUp"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentTop="true"
-	    android:layout_centerHorizontal="true"
-	    android:text="Button" />
+	    android:text="Up" />
+
+	<Button
+	    android:id="@+id/butDown"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_toRightOf="@id/butUp"
+	    android:text="Down" />
 
 </RelativeLayout>
