@@ -113,6 +113,16 @@ public class Gorilka extends GameObject {
 			nabitaKoule.strel(this);
 			nabitaKoule = null;
 			fireTime = 0;
+			
+			if (actualPic == picUpFull)
+				actualPic = picUp;
+			if (actualPic == picDownFull)
+				actualPic = picDown;
+			if (actualPic == picLeftFull)
+				actualPic = picLeft;
+			if (actualPic == picRightFull)
+				actualPic = picRight;
+			
 		}
 	}
 	

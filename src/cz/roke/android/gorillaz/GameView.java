@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 
 public class GameView extends View implements TimerUpdatable {
 
@@ -20,7 +21,11 @@ public class GameView extends View implements TimerUpdatable {
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
 
-private Bitmap palma;
+	private Bitmap logo;
+
+	private int logoTime = 0;
+	
+	private Bitmap palma;
 	private Bitmap popredi;
 	
 	public static Context context;
@@ -71,6 +76,7 @@ private Bitmap palma;
 
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
 		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
+		logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo);
 		
 		
 		gorilka1 = new Gorilka(100, 100);
@@ -126,11 +132,16 @@ private Bitmap palma;
 		buttonLeftB.draw(canvas, p);
 		buttonRightB.draw(canvas, p);
 		buttonFireB.draw(canvas, p);
+		
+		if (logoTime < 50 )
+			canvas.drawBitmap(logo, 0, 0, p);
 	}
 
 	@Override
 	public void timerUpdate() {
 
+		logoTime ++;
+		
 		// Player 1
 		if (up == true)
 			gorilka1.moveUp();
