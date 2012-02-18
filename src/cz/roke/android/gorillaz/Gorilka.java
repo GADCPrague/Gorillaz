@@ -33,6 +33,7 @@ public class Gorilka extends GameObject {
 		picRight = BitmapFactory.decodeResource(resources, R.drawable.right);
 		
 		actualPic = picRight;
+		
 	}
 	
 	public Gorilka(int x, int y, int width, int height) {
