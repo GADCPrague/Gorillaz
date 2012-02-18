@@ -36,17 +36,20 @@ private Bitmap palma;
 	// Oblasti pro joystick
 	private final int SI = 40;
 	private final int OKRAJ = 320;
+	private final int OKRAJ_W = 320;
 	
 	// TODO Zjistit okraj obrazovky a pocitat od nej
 	private GameObject buttonUpA = new GameObject(SI, OKRAJ - SI * 2, SI, SI);
 	private GameObject buttonDownA = new GameObject(SI, OKRAJ - SI, SI, SI);
 	private GameObject buttonLeftA = new GameObject(0, OKRAJ - SI, SI, SI);
 	private GameObject buttonRightA = new GameObject(SI * 2, OKRAJ - SI, SI, SI);
+	private GameObject buttonFireA = new GameObject(OKRAJ_W - SI, OKRAJ - SI, SI, SI);
 	
 	private GameObject buttonUpB = new GameObject(SI, 0, SI, SI);
 	private GameObject buttonDownB = new GameObject(SI, SI, SI, SI);
 	private GameObject buttonLeftB = new GameObject(0, 0, SI, SI);
 	private GameObject buttonRightB = new GameObject(SI * 2, 0, SI, SI);
+	private GameObject buttonFireB = new GameObject(OKRAJ_W - SI, 0, SI, SI);
 
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -110,6 +113,19 @@ private Bitmap palma;
 	
 		
 		canvas.drawBitmap(popredi, 0, 0, p);
+
+		// TODO
+		buttonUpA.draw(canvas, p);
+		buttonDownA.draw(canvas, p);
+		buttonLeftA.draw(canvas, p);
+		buttonRightA.draw(canvas, p);
+		buttonFireA.draw(canvas, p);
+		
+		buttonUpB.draw(canvas, p);
+		buttonDownB.draw(canvas, p);
+		buttonLeftB.draw(canvas, p);
+		buttonRightB.draw(canvas, p);
+		buttonFireB.draw(canvas, p);
 	}
 
 	@Override
@@ -204,7 +220,12 @@ private Bitmap palma;
 							if (buttonRightA.isInside(x, y)) {
 								right = false;
 								continue;
-							}
+							} else
+								
+								if (buttonFireA.isInside(x, y)) {
+									gorilka1.fire();
+									continue;
+								}
 				
 				if (buttonUpB.isInside(x, y)) {
 					upB = false;
@@ -224,7 +245,12 @@ private Bitmap palma;
 							if (buttonRightB.isInside(x, y)) {
 								rightB = false;
 								continue;
-							}
+							} else
+								
+								if (buttonFireA.isInside(x, y)) {
+									gorilka2.fire();
+									continue;
+								}
 			}
 
 			if (buttonUpA.isInside(x, y)) {
