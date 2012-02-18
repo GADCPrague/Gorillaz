@@ -76,9 +76,7 @@ public class GameView extends View implements TimerUpdatable {
 		
 		mapa.draw(canvas, p);
 		gorilka1.draw(canvas, p);
-		
-		
-		canvas.drawBitmap(b, 10, 10, p);
+	
 		
 		for (Koule ball : balls) {
 			ball.draw(canvas);
