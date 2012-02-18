@@ -18,7 +18,7 @@ public class GameView extends View implements TimerUpdatable {
 	
 	private static final String TAG = "GameView";
 	private GorillazActivity ga;
-	private Bitmap palma;
+	private Bitmap popredi;
 	
 	public static Context context;
 
@@ -50,7 +50,7 @@ public class GameView extends View implements TimerUpdatable {
 		this.context = context;
 		
 		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
-		palma = BitmapFactory.decodeResource(context.getResources(), R.drawable.palma);
+		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
 		
 		
 		gorilka1 = new Gorilka(100, 100);
@@ -87,7 +87,7 @@ public class GameView extends View implements TimerUpdatable {
 			ball.draw(canvas, p);
 		}
 		
-		canvas.drawBitmap(palma, -50, 150, p);
+		//canvas.drawBitmap(popredi, 0, 0, p);
 	}
 
 	@Override

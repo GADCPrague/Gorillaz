@@ -15,7 +15,7 @@ public class Gorilka extends GameObject {
 	public static final int MOVE = 2;
 	
 	public int due;
-	
+	 
 	public Bitmap picUp;
 	public Bitmap picDown;
 	public Bitmap picLeft;
@@ -83,6 +83,7 @@ public class Gorilka extends GameObject {
 	
 	public void fire() {
 		GameView.balls.add(new Koule(x, y, due, this));
+		nabito = false;
 	}
 	
 	public void draw(Canvas canvas, Paint paint) {

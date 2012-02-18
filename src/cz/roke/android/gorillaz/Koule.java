@@ -86,6 +86,8 @@ public class Koule extends GameObject {
 			}
 		}
 		
+		Gorilka gorilky[] = GameView.gorilkaArray;
+		
 		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
 			if (this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik ) {
 				movement = false;
