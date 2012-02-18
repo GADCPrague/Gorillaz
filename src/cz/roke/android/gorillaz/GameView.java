@@ -37,7 +37,21 @@ public class GameView extends View {
 		Paint p = new Paint();
 		p.setColor(Color.RED);
 
-		canvas.drawRect(0, 0, 20, 20, p);
+		Gorilka g2 = new Gorilka(90, 90);
+		Gorilka g1 = new Gorilka(88, 85, 100, 100);
+			
+		p.setColor(Color.RED);
+		canvas.drawRect(g1.getX(), g1.getY(), g1.getRight(), g1.getBottom(), p);
+		
+		p.setColor(Color.GREEN);
+		canvas.drawRect(g2.getX(), g2.getY(), g2.getRight(), g2.getBottom(), p);
+		
+		p.setColor(Color.YELLOW);
+		if ( g1.isCollision(g2) == true ) {
+			canvas.drawText("KOLIZE !!!", 20, 20, p);
+		}
+
+		
 	}
 
 }
