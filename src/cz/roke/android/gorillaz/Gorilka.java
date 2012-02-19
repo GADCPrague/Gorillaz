@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.Log;
 
 public class Gorilka extends GameObject {
@@ -38,6 +37,7 @@ public class Gorilka extends GameObject {
 	public Koule nabitaKoule = null;
 
 	private Anim anim;
+	private Bitmap animBitmap, animBitmapFull;
 
 	public Gorilka(int x, int y) {
 		setX(x);
@@ -49,7 +49,10 @@ public class Gorilka extends GameObject {
 
 		// TODO Na zacatku vpravo
 		due = GorillazActivity.RIGHT;
-		anim = new Anim();
+
+		anim = new Anim(3, 5, 40);
+		animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
+		animBitmapFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_straight_animation);
 
 		picUp = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up);
 		picDown = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down);
@@ -142,7 +145,11 @@ public class Gorilka extends GameObject {
 	}
 
 	public void draw(Canvas canvas, Paint paint) {
-		anim.draw(canvas, x, y, paint);
+		if (nabitaKoule == null) {
+			anim.draw(canvas, animBitmap, x, y, paint);
+		} else {
+			anim.draw(canvas, animBitmapFull, x, y, paint);
+		}
 
 		fireTime++;
 		if (fireTime >= RELOAD_TIME) {

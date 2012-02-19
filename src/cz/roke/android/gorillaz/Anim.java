@@ -1,43 +1,43 @@
 package cz.roke.android.gorillaz;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
 public class Anim {
 
-	private int ANIM_COUNT = 3, ANIM_DELAY = 5, ANIM_SIZE = 40;
+	private int animCount = 3, animDelay = 5, animSize = 40;
 	private int animType, animFrame, animProgress;
-	private Bitmap animBitmap;
 
-	public Anim() {
+	public Anim(int count, int delay, int size) {
+		animCount = count;
+		animDelay = delay;
+		animSize = size;
+
 		animType = 0;
 		animFrame = 0;
 		animProgress = 0;
-		animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
-
 	}
 
 	public void animate(int type) {
 		animType = type;
 		animProgress++;
-		if (animProgress >= ANIM_DELAY) {
+		if (animProgress >= animDelay) {
 			animProgress = 0;
 			animFrame++;
-			if (animFrame >= ANIM_COUNT) {
+			if (animFrame >= animCount) {
 				animFrame = 0;
 			}
 		}
 	}
 
-	public void draw(Canvas canvas, int x, int y, Paint paint) {
-		int gX = animFrame * ANIM_SIZE;
-		int gY = animType * ANIM_SIZE;
-		Rect src = new Rect(gX, gY, gX + ANIM_SIZE, gY + ANIM_SIZE);
-		Rect dst = new Rect(x, y, x + ANIM_SIZE, y + ANIM_SIZE);
-		canvas.drawBitmap(animBitmap, src, dst, paint);
+	public void draw(Canvas canvas, Bitmap bitmap, int x, int y, Paint paint) {
+		int gX = animFrame * animSize;
+		int gY = animType * animSize;
+		Rect src = new Rect(gX, gY, gX + animSize, gY + animSize);
+		Rect dst = new Rect(x, y, x + animSize, y + animSize);
+		canvas.drawBitmap(bitmap, src, dst, paint);
 	}
 
 }
