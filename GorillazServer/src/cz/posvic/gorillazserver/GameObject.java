@@ -38,7 +38,7 @@ public class GameObject {
 	public GameObject() {
 
 	}
-
+/*
 	public GameObject(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
@@ -158,9 +158,7 @@ public class GameObject {
 		return true;
 	}
 
-	/*
-	 * Return true if point is inside game object.
-	 */
+	
 	public boolean isInside(int x, int y) {
 
 		if (x < this.x) {
@@ -185,5 +183,5 @@ public class GameObject {
 	public void draw(Canvas c, Paint p) {
 		p.setAlpha(90);
 		c.drawRect(x, y, x + width, y + height, p);
-	}
+	} */
 }

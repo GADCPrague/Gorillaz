@@ -2,6 +2,8 @@ package cz.posvic.gorillazserver;
 
 import java.nio.channels.SocketChannel;
 
+import javax.imageio.ImageIO;
+
 public class Client {
 
 	private SocketChannel channel;
@@ -20,6 +22,8 @@ public class Client {
 
 	public StringBuffer getBuffer() {
 		return buffer;
+		
+
 	}
 
 }

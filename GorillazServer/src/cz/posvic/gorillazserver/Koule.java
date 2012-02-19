@@ -1,13 +1,8 @@
 package cz.posvic.gorillazserver;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.util.Log;
 
 public class Koule extends GameObject {
-
+/*
 	public final int WIDTH = 16;
 	public final int HEIGHT = 16;
 
@@ -136,5 +131,5 @@ public class Koule extends GameObject {
 			anim.draw(canvas, obrazek, x, y, paint);
 		}
 
-	}
+	}*/
 }

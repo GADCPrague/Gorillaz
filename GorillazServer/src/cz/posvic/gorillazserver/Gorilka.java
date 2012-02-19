@@ -1,14 +1,8 @@
 package cz.posvic.gorillazserver;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.util.DisplayMetrics;
-import android.util.Log;
 
 public class Gorilka extends GameObject {
-
+/*
 	private static final String TAG = "Gorilka";
 
 	public static final int WIDTH = 40;
@@ -170,5 +164,5 @@ public class Gorilka extends GameObject {
 		x = (int) (Math.random() * 430 + 40);
 		y = (int) (Math.random() * 270 + 40);
 	}
-
+*/
 }
