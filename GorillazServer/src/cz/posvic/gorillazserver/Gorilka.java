@@ -2,7 +2,7 @@ package cz.posvic.gorillazserver;
 
 
 public class Gorilka extends GameObject {
-/*
+
 	private static final String TAG = "Gorilka";
 
 	public static final int WIDTH = 40;
@@ -15,24 +15,11 @@ public class Gorilka extends GameObject {
 
 	public int due;
 
-	public Bitmap picUp;
-	public Bitmap picDown;
-	public Bitmap picLeft;
-	public Bitmap picRight;
-
-	public Bitmap picUpFull;
-	public Bitmap picDownFull;
-	public Bitmap picLeftFull;
-	public Bitmap picRightFull;
-
-	public Bitmap actualPic;
-
 	public int fireTime = 0;
 
 	public Koule nabitaKoule = null;
 
 	private Anim anim;
-	private Bitmap animBitmap, animBitmapFull;
 
 	public Gorilka(int x, int y) {
 		setX(x);
@@ -45,22 +32,7 @@ public class Gorilka extends GameObject {
 		// TODO Na zacatku vpravo
 		due = GorillazActivity.RIGHT;
 
-		float density = GameView.context.getResources().getDisplayMetrics().density;
-		anim = new Anim(3, 5, (int) (40 * density));
-		animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
-		animBitmapFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_straight_animation);
-
-		picUp = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up);
-		picDown = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down);
-		picLeft = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left);
-		picRight = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right);
-
-		picUpFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up_full);
-		picDownFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down_full);
-		picLeftFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left_full);
-		picRightFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right_full);
-
-		actualPic = picRight;
+		anim = new Anim(3, 5);
 	}
 
 	public void moveUp() {
@@ -71,10 +43,6 @@ public class Gorilka extends GameObject {
 
 		setY(getY() - MOVE);
 		due = GorillazActivity.UP;
-		if (nabitaKoule == null)
-			actualPic = picUp;
-		else
-			actualPic = picUpFull;
 	}
 
 	public void moveDown() {
@@ -85,10 +53,6 @@ public class Gorilka extends GameObject {
 
 		setY(getY() + MOVE);
 		due = GorillazActivity.DOWN;
-		if (nabitaKoule == null)
-			actualPic = picDown;
-		else
-			actualPic = picDownFull;
 	}
 
 	public void moveLeft() {
@@ -99,10 +63,6 @@ public class Gorilka extends GameObject {
 
 		setX(getX() - MOVE);
 		due = GorillazActivity.LEFT;
-		if (nabitaKoule == null)
-			actualPic = picLeft;
-		else
-			actualPic = picLeftFull;
 	}
 
 	public void moveRight() {
@@ -113,38 +73,23 @@ public class Gorilka extends GameObject {
 
 		setX(getX() + MOVE);
 		due = GorillazActivity.RIGHT;
-		if (nabitaKoule == null)
-			actualPic = picRight;
-		else
-			actualPic = picRightFull;
 	}
 
 	public void fire() {
-		Log.d(TAG, "Fire!");
-
 		if (nabitaKoule != null) {
 
 			nabitaKoule.strel(this);
 			nabitaKoule = null;
 			fireTime = 0;
-
-			if (actualPic == picUpFull)
-				actualPic = picUp;
-			if (actualPic == picDownFull)
-				actualPic = picDown;
-			if (actualPic == picLeftFull)
-				actualPic = picLeft;
-			if (actualPic == picRightFull)
-				actualPic = picRight;
-
 		}
 	}
 
-	public void draw(Canvas canvas, Paint paint) {
+	// TODO
+	public void preparedToSendToClient() {
 		if (nabitaKoule == null) {
-			anim.draw(canvas, animBitmap, x, y, paint);
+			// anim.draw(canvas, animBitmap, x, y, paint);
 		} else {
-			anim.draw(canvas, animBitmapFull, x, y, paint);
+			// anim.draw(canvas, animBitmapFull, x, y, paint);
 		}
 
 		fireTime++;
@@ -164,5 +109,5 @@ public class Gorilka extends GameObject {
 		x = (int) (Math.random() * 430 + 40);
 		y = (int) (Math.random() * 270 + 40);
 	}
-*/
+
 }

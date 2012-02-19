@@ -20,11 +20,15 @@ public class ServerSide extends Communication implements Runnable {
 	private ServerSocketChannel serverChannel;
 	private ArrayList<Client> clients;
 	
+
     public Gson gson = new Gson();
 
-    public Mapa mapa;
-    
-    
+	public static Gorilka gorilkaArray[];
+	public static Mapa mapa;
+	
+
+
+
     
 	public ServerSide(int port) {
 		super("\r\n", 512, 512);
@@ -63,6 +67,10 @@ public class ServerSide extends Communication implements Runnable {
 			try {
 				acceptNewClient();
 				readMessage();
+				
+				
+				//TODO
+				//herni engin
 				
 				try {
 					Thread.sleep(30);

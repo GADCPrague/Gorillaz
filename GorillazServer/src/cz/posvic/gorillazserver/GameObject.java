@@ -38,7 +38,7 @@ public class GameObject {
 	public GameObject() {
 
 	}
-/*
+
 	public GameObject(int x, int y, int w, int h) {
 		this.x = x;
 		this.y = y;
@@ -123,7 +123,7 @@ public class GameObject {
 		int px = (getRight() - x) / 2  + x;
 		int py = y - 3;
 		
-		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
+		if ( ServerSide.mapa.isKolizeAtPos(px, py) == true )
 			return false;
 
 		return true;
@@ -132,7 +132,7 @@ public class GameObject {
 	public boolean canDown() {
 		int px = (getRight() - x) /2  + x;
 		int py = getBottom() + 3;
-		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
+		if ( ServerSide.mapa.isKolizeAtPos(px, py) == true )
 			return false;
 
 		return true;
@@ -142,7 +142,7 @@ public class GameObject {
 		int py = (getBottom() - y) /2  + y;
 		int px = x - 3;
 		
-		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
+		if ( ServerSide.mapa.isKolizeAtPos(px, py) == true )
 			return false;
 
 		return true;
@@ -152,7 +152,7 @@ public class GameObject {
 		int py = (getBottom() - y) / 2 + y;
 		int px = getRight() + 3;
 		
-		if ( GameView.mapa.collisionMap.getPixel(px, py) < -2 )
+		if ( ServerSide.mapa.isKolizeAtPos(px, py) == true )
 			return false;
 
 		return true;
@@ -180,8 +180,4 @@ public class GameObject {
 		return true;
 	}
 
-	public void draw(Canvas c, Paint p) {
-		p.setAlpha(90);
-		c.drawRect(x, y, x + width, y + height, p);
-	} */
 }

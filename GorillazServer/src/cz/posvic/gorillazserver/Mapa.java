@@ -1,5 +1,6 @@
 package cz.posvic.gorillazserver;
 
+
 import java.awt.Canvas;
 import java.awt.Paint;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ public class Mapa {
 			return false;
 		
 		return true;
+
 	}
 	
 }
