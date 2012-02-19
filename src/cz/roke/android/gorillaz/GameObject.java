@@ -186,7 +186,7 @@ public class GameObject {
 	}
 
 	public void draw(Canvas c, Paint p) {
-		p.setAlpha(90);
+		p.setAlpha(200);
 		c.drawRect(x, y, x + width, y + height, p);
 	}
 }
