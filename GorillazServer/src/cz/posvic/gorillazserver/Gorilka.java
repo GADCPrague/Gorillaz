@@ -13,6 +13,12 @@ public class Gorilka extends GameObject {
 
 	public static final int RELOAD_TIME = 10;
 
+	public boolean up = false;
+	public boolean down = false;
+	public boolean left = false;
+	public boolean right = false;
+	public boolean fire = false;
+
 	public int due;
 
 	public int fireTime = 0;
@@ -110,4 +116,20 @@ public class Gorilka extends GameObject {
 		y = (int) (Math.random() * 270 + 40);
 	}
 
+	public void update() {
+		if (up) {
+			moveUp();
+		} else if (down) {
+			moveDown();
+		} else if (left) {
+			moveLeft();
+		} else if (right) {
+			moveRight();
+		}
+		
+		if (fire) {
+			fire();
+		}
+	}
+	
 }

@@ -95,14 +95,14 @@ public class Koule extends GameObject {
 			}
 		}
 
-		for (int i = 0; i < ServerSide.gorilkaArray.length; i++) {
-			if (this.vystrelena == true && this.isCollision(ServerSide.gorilkaArray[i]) && ServerSide.gorilkaArray[i] != vlastnik) {
+		for (int i = 0; i < ServerSide.gorilky.size(); i++) {
+			if (this.vystrelena == true && this.isCollision(ServerSide.gorilky.get(i)) && ServerSide.gorilky.get(i) != vlastnik) {
 				zastavSe();
-				ServerSide.gorilkaArray[i].respawn();
+				ServerSide.gorilky.get(i).respawn();
 			}
 
-			if (this.vystrelena == false && this.nabita == false && this.isCollision(ServerSide.gorilkaArray[i]) && ServerSide.gorilkaArray[i].nabitaKoule == null) {
-				ServerSide.gorilkaArray[i].vemKouli(this);
+			if (this.vystrelena == false && this.nabita == false && this.isCollision(ServerSide.gorilky.get(i)) && ServerSide.gorilky.get(i).nabitaKoule == null) {
+				ServerSide.gorilky.get(i).vemKouli(this);
 			}
 		}
 
@@ -114,12 +114,4 @@ public class Koule extends GameObject {
 		vlastnik = null;
 	}
 
-	// TODO
-	public void preparedToSendToClient() {
-
-		if (nabita == false) {
-			// anim.draw(canvas, obrazek, x, y, paint);
-		}
-
-	}
 }
