@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@drawable/menu_pozadi" >
+
+    <Button
+        android:id="@+id/butHelp"
+        android:layout_margin="5dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/butAbout"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_help" />
+
+    <Button
+        android:id="@+id/butAbout"
+        android:layout_margin="5dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/butExit"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_about" />
+    
+    <Button
+        android:id="@+id/butExit"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="15dip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/menu_exit" />
+
+    <Button
+        android:id="@+id/butStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/butHelp"
+        android:layout_alignLeft="@+id/butHelp"
+        android:layout_marginBottom="76dp"
+        android:background="@drawable/menu_join"
+        android:padding="10dip" />
+
+</RelativeLayout>
