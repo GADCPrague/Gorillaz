@@ -113,7 +113,7 @@ public class GameView extends View implements TimerUpdatable {
 		ga.timer.setAnimator(this);
 
 		// TODO Zakomentovat, pokud nechci server
-		client.connect();
+		// client.connect();
 	}
 
 	@Override

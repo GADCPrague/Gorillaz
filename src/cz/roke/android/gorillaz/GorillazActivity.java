@@ -10,7 +10,7 @@ import android.view.KeyEvent;
 public class GorillazActivity extends Activity {
 
 	private static final String TAG = "GorillazActivity";
-	
+
 	public static final int UP = 19;
 	public static final int DOWN = 20;
 	public static final int LEFT = 21;
@@ -28,23 +28,24 @@ public class GorillazActivity extends Activity {
 
 		debugStartGame();
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		Log.i("", "key down :" + keyCode);
 
-		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
-		{
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
 			try {
-				gameView.client.getChannel().close();
+				if (gameView != null && gameView.client != null && gameView.client.getChannel() != null) {
+					gameView.client.getChannel().close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 			Log.d(TAG, "Konec");
-			//return false;
+			// return false;
 		}
-		
+
 		if (keyCode == UP)
 			gameView.up = true;
 		else if (keyCode == DOWN)
