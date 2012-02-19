@@ -149,8 +149,9 @@ public class GameView extends View implements TimerUpdatable {
 		buttonRightB.draw(canvas, p);
 		buttonFireB.draw(canvas, p);
 
-		if (logoTime < 100 )
-			canvas.drawBitmap(logo, 0, 0, p);
+		if (logoTime < 100 ) {
+			// TODO canvas.drawBitmap(logo, 0, 0, p);
+		}
 	}
 
 	@Override
