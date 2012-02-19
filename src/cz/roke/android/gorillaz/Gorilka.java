@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 public class Gorilka extends GameObject {
@@ -50,7 +51,8 @@ public class Gorilka extends GameObject {
 		// TODO Na zacatku vpravo
 		due = GorillazActivity.RIGHT;
 
-		anim = new Anim(3, 5, 40);
+		float density = GameView.context.getResources().getDisplayMetrics().density;
+		anim = new Anim(3, 5, (int) (40 * density));
 		animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
 		animBitmapFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_straight_animation);
 

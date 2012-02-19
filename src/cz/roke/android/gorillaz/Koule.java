@@ -30,7 +30,8 @@ public class Koule extends GameObject {
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
 
-		anim = new Anim(6, 5, 40);
+		float density = GameView.context.getResources().getDisplayMetrics().density;
+		anim = new Anim(6, 1, (int) (40 * density));
 		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech_animation);
 
 		nabita = false;

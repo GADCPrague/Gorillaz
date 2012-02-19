@@ -80,6 +80,8 @@ public class GameView extends View implements TimerUpdatable {
 	private void init() {
 		Log.d(TAG, "init");
 
+		float density = GameView.context.getResources().getDisplayMetrics().density;
+		
 		// Create areas for joystick
 		buttonUpA = new GameObject(SI, height2 - SI * 3, SI, SI);
 		buttonDownA = new GameObject(SI, height2 - SI, SI, SI);
