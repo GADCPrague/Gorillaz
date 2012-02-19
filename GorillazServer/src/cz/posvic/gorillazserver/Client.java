@@ -7,6 +7,8 @@ public class Client {
 	private SocketChannel channel;
 	private StringBuffer buffer;
 
+	
+	
 	public Client(SocketChannel channel) {
 		this.channel = channel;
 		this.buffer = new StringBuffer();

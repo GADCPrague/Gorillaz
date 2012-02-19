@@ -7,16 +7,20 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.google.gson.Gson;
+
 public class ServerSide extends Communication implements Runnable {
 
 	public static void main(String[] args) {
-		ServerSide ss = new ServerSide(4444);
+		ServerSide ss = new ServerSide(27000);
 		ss.exec();
 	}
 
 	public static String TAG = "Server";
 	private ServerSocketChannel serverChannel;
 	private ArrayList<Client> clients;
+	
+	Gson gson = new Gson();
 
 	public ServerSide(int port) {
 		super("\r\n", 512, 512);
@@ -49,6 +53,11 @@ public class ServerSide extends Communication implements Runnable {
 			try {
 				acceptNewClient();
 				readMessage();
+				
+				try {
+					Thread.sleep(30);
+				} catch (InterruptedException e) {
+				}
 			}
 
 			catch (IOException ioe) {
@@ -115,16 +124,13 @@ public class ServerSide extends Communication implements Runnable {
 	// -------------------------------------------------------------------------
 
 	public void acceptUser(SocketChannel channel) {
+		System.out.println("pridavam klienta");
 		clients.add(new Client(channel));
 	}
 
 	public boolean readMessage(Client client, String message) {
-		try {
-			prepareWriteBuffer(message);
-			send(client.getChannel());
-		} catch (TooLongMessageException e) {
-			System.err.println(e);
-		}
+			
+		ClientPacket packet = gson.fromJson(message, ClientPacket.class);
 
 		return false;
 	}
