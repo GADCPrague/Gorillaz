@@ -21,7 +21,7 @@ public class GameView extends View implements TimerUpdatable {
 
 	private Bitmap logo;
 
-	private int logoTime = 0;
+	private int gameTime = 0;
 
 	private Bitmap popredi;
 
@@ -48,6 +48,8 @@ public class GameView extends View implements TimerUpdatable {
 	private GameObject buttonRightB;
 	private GameObject buttonFireB;
 
+	public Client client = new Client();
+
 	public GameView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		ga = (GorillazActivity) context;
@@ -71,14 +73,14 @@ public class GameView extends View implements TimerUpdatable {
 		}
 	}
 
-	// TODO Oblasti pro joystick
-	private final int SI = 40;
-
 	/*
 	 * Inicialize game.
 	 */
 	private void init() {
 		Log.d(TAG, "init");
+
+		float density = GameView.context.getResources().getDisplayMetrics().density;
+		int SI = (int) (40 * density);
 
 		// Create areas for joystick
 		buttonUpA = new GameObject(SI, height2 - SI * 3, SI, SI);
@@ -92,9 +94,12 @@ public class GameView extends View implements TimerUpdatable {
 		buttonRightB = new GameObject(width2 - SI, SI, SI, SI);
 		buttonFireB = new GameObject(0, 0, SI, SI);
 
-		mapa = new Mapa(context.getResources(), R.drawable.kolize, R.drawable.pozadi);
-		popredi = BitmapFactory.decodeResource(context.getResources(), R.drawable.popredi);
-		logo = BitmapFactory.decodeResource(context.getResources(), R.drawable.logo);
+		mapa = new Mapa(context.getResources(), R.drawable.kolize,
+				R.drawable.pozadi);
+		popredi = BitmapFactory.decodeResource(context.getResources(),
+				R.drawable.popredi);
+		logo = BitmapFactory.decodeResource(context.getResources(),
+				R.drawable.logo);
 
 		gorilka1 = new Gorilka(100, 100);
 		gorilka2 = new Gorilka(200, 200);
@@ -104,7 +109,8 @@ public class GameView extends View implements TimerUpdatable {
 		gorilkaArray[1] = gorilka2;
 
 		for (int i = 0; i < 10; i++) {
-			GameView.balls.add(new Koule((int) (Math.random() * 400 + 40), (int) (Math.random() * 250 + 40)));
+			GameView.balls.add(new Koule((int) (Math.random() * 400 + 40),
+					(int) (Math.random() * 250 + 40)));
 		}
 
 		setFocusable(true);
@@ -113,6 +119,9 @@ public class GameView extends View implements TimerUpdatable {
 			ga.timer = new Timer(30);
 		}
 		ga.timer.setAnimator(this);
+
+		// TODO Zakomentovat, pokud nechci server
+		client.connect();
 	}
 
 	@Override
@@ -149,27 +158,42 @@ public class GameView extends View implements TimerUpdatable {
 		buttonRightB.draw(canvas, p);
 		buttonFireB.draw(canvas, p);
 
-		if (logoTime < 100 )
-			canvas.drawBitmap(logo, 0, 0, p);
+		if (gameTime < 100) {
+			// TODO canvas.drawBitmap(logo, 0, 0, p);
+		}
+
 	}
 
 	@Override
 	public void timerUpdate() {
 
-		logoTime++;
+		gameTime++;
+
+		if (client != null && client.isConnect() == true) {
+			client.netSend.up = up;
+			client.netSend.down = down;
+			client.netSend.left = left;
+			client.netSend.right = right;
+			client.netSend.fire = fire;
+
+			client.send();
+		}
 
 		// Player 1
-		if (up == true)
+		if (up == true) {
 			gorilka1.moveUp();
-		else if (down == true)
+		} else if (down == true) {
 			gorilka1.moveDown();
-		else if (left == true)
+		} else if (left == true) {
 			gorilka1.moveLeft();
-		else if (right == true)
+		} else if (right == true) {
 			gorilka1.moveRight();
+		}
 
-		if (fire == true)
+		if (fire == true) {
 			gorilka1.fire();
+			client.netSend.fire = true;
+		}
 
 		// Player 2
 		if (upB == true)
@@ -186,6 +210,10 @@ public class GameView extends View implements TimerUpdatable {
 
 		for (Koule ball : balls) {
 			ball.update();
+		}
+
+		if (gameTime % 50 == 0 && client.isConnect() == false) {
+			client.connect();
 		}
 
 		this.postInvalidate();
@@ -212,7 +240,8 @@ public class GameView extends View implements TimerUpdatable {
 			int y = (int) event.getY(i);
 
 			// Pri zvednuti lib. kurzoru se vse zastavi
-			if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_POINTER_UP) {
+			if (actionCode == MotionEvent.ACTION_UP
+					|| actionCode == MotionEvent.ACTION_POINTER_UP) {
 				if (buttonUpA.isInside(x, y)) {
 					up = false;
 					continue;
