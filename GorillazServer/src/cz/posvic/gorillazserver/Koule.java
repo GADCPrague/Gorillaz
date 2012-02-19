@@ -1,10 +1,5 @@
 package cz.posvic.gorillazserver;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.util.Log;
 
 public class Koule extends GameObject {
 
@@ -14,8 +9,6 @@ public class Koule extends GameObject {
 	public static final int RYCHLOST = 5;
 
 	private int move;
-
-	private Bitmap obrazek;
 
 	private Gorilka vlastnik;
 
@@ -30,10 +23,7 @@ public class Koule extends GameObject {
 		setWidth(WIDTH);
 		setHeight(HEIGHT);
 
-		float density = GameView.context.getResources().getDisplayMetrics().density;
-		anim = new Anim(6, 1, (int) (40 * density));
-		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech_animation);
-
+		anim = new Anim(6, 1);
 		nabita = false;
 		vystrelena = false;
 	}
@@ -63,7 +53,7 @@ public class Koule extends GameObject {
 					int px = (getRight() - x) / 2 + x;
 					int py = y - 1;
 
-					if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					if (ServerSide.mapa.collisionMap.getPixel(px, py) < -1) {
 						zastavSe();
 					} else
 						y -= RYCHLOST;
@@ -74,7 +64,7 @@ public class Koule extends GameObject {
 					int px = (getRight() - x) / 2 + x;
 					int py = getBottom() + 1;
 
-					if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					if (ServerSide.mapa.collisionMap.getPixel(px, py) < -1) {
 						zastavSe();
 					} else
 						y += RYCHLOST;
@@ -85,9 +75,9 @@ public class Koule extends GameObject {
 					int py = (getBottom() - y) / 2 + y;
 					int px = x - 1;
 
-					Log.i("", "" + GameView.mapa.collisionMap.getWidth() + " " + GameView.mapa.collisionMap.getHeight());
+					Log.i("", "" + ServerSide.mapa.collisionMap.getWidth() + " " + ServerSide.mapa.collisionMap.getHeight());
 
-					if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					if (ServerSide.mapa.collisionMap.getPixel(px, py) < -1) {
 						zastavSe();
 					} else
 						x -= RYCHLOST;
@@ -98,7 +88,7 @@ public class Koule extends GameObject {
 					int py = (getBottom() - y) / 2 + y;
 					int px = getRight() + 1;
 
-					if (GameView.mapa.collisionMap.getPixel(px, py) < -1) {
+					if (ServerSide.mapa.collisionMap.getPixel(px, py) < -1) {
 						zastavSe();
 					} else
 						x += RYCHLOST;
@@ -107,14 +97,14 @@ public class Koule extends GameObject {
 			}
 		}
 
-		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
-			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik) {
+		for (int i = 0; i < ServerSide.gorilkaArray.length; i++) {
+			if (this.vystrelena == true && this.isCollision(ServerSide.gorilkaArray[i]) && ServerSide.gorilkaArray[i] != vlastnik) {
 				zastavSe();
-				GameView.gorilkaArray[i].respawn();
+				ServerSide.gorilkaArray[i].respawn();
 			}
 
-			if (this.vystrelena == false && this.nabita == false && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i].nabitaKoule == null) {
-				GameView.gorilkaArray[i].vemKouli(this);
+			if (this.vystrelena == false && this.nabita == false && this.isCollision(ServerSide.gorilkaArray[i]) && ServerSide.gorilkaArray[i].nabitaKoule == null) {
+				ServerSide.gorilkaArray[i].vemKouli(this);
 			}
 		}
 
@@ -126,14 +116,11 @@ public class Koule extends GameObject {
 		vlastnik = null;
 	}
 
-	public void draw(Canvas canvas, Paint paint) {
-
-		if (paint == null) {
-			paint = new Paint();
-		}
+	// TODO
+	public void preparedToSendToClient() {
 
 		if (nabita == false) {
-			anim.draw(canvas, obrazek, x, y, paint);
+			// anim.draw(canvas, obrazek, x, y, paint);
 		}
 
 	}

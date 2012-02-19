@@ -9,6 +9,8 @@ import java.util.Iterator;
 
 import com.google.gson.Gson;
 
+import cz.roke.android.gorillaz.Mapa;
+
 public class ServerSide extends Communication implements Runnable {
 
 	public static void main(String[] args) {
@@ -19,6 +21,9 @@ public class ServerSide extends Communication implements Runnable {
 	public static String TAG = "Server";
 	private ServerSocketChannel serverChannel;
 	private ArrayList<Client> clients;
+	
+	public static Gorilka gorilkaArray[];
+	public static Mapa mapa;
 	
 	Gson gson = new Gson();
 
