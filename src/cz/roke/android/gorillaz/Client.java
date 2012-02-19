@@ -52,7 +52,7 @@ public class Client {
 	
 	public void connect() {
 		try {
-			channel = SocketChannel.open(new InetSocketAddress("192.168.200.68", 27000));
+			channel = SocketChannel.open(new InetSocketAddress("192.168.200.117", 27000));
 			channel.configureBlocking(false);
 
 		} catch (IOException e) {
