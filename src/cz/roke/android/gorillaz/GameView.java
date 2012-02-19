@@ -71,7 +71,7 @@ public class GameView extends View implements TimerUpdatable {
 		}
 	}
 
-	// Oblasti pro joystick
+	// TODO Oblasti pro joystick
 	private final int SI = 40;
 
 	/*
