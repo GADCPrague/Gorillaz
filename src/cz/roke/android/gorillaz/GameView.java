@@ -1,6 +1,8 @@
 package cz.roke.android.gorillaz;
 
+import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -30,10 +32,9 @@ public class GameView extends View implements TimerUpdatable {
 	public boolean up, down, left, right, fire;
 	public boolean upB, downB, leftB, rightB, fireB;
 
-	public static LinkedList<Koule> balls = new LinkedList<Koule>();
+	public static List<Koule> balls = null;
 
-	public Gorilka gorilka1, gorilka2;
-	public static Gorilka gorilkaArray[];
+	public static List<Gorilka> gorilkaArray;
 
 	// TODO Zjistit okraj obrazovky a pocitat od nej
 	private GameObject buttonUpA;
@@ -101,17 +102,8 @@ public class GameView extends View implements TimerUpdatable {
 		logo = BitmapFactory.decodeResource(context.getResources(),
 				R.drawable.logo);
 
-		gorilka1 = new Gorilka(100, 100);
-		gorilka2 = new Gorilka(200, 200);
-
-		gorilkaArray = new Gorilka[2];
-		gorilkaArray[0] = gorilka1;
-		gorilkaArray[1] = gorilka2;
-
-		for (int i = 0; i < 10; i++) {
-			GameView.balls.add(new Koule((int) (Math.random() * 400 + 40),
-					(int) (Math.random() * 250 + 40)));
-		}
+		balls = null;
+		gorilkaArray = null;
 
 		setFocusable(true);
 
@@ -136,12 +128,19 @@ public class GameView extends View implements TimerUpdatable {
 
 		mapa.draw(canvas, p);
 
-		for (Koule ball : balls) {
-			ball.draw(canvas, p);
+		if (balls != null) {
+			for (Koule ball : balls) {
+				ball.draw(canvas, p);
+			}
 		}
 
-		gorilka1.draw(canvas, p);
-		gorilka2.draw(canvas, p);
+		Log.i("", "timer");
+		if (gorilkaArray != null) {
+			for (Gorilka gorilka : gorilkaArray) {
+				gorilka.draw(canvas, p);
+				Log.i("", "gorilka");
+			}
+		}
 
 		canvas.drawBitmap(popredi, 0, 0, p);
 
@@ -168,6 +167,14 @@ public class GameView extends View implements TimerUpdatable {
 	public void timerUpdate() {
 
 		gameTime++;
+		Log.i("", "timer2");
+		
+		try {
+			client.update();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		if (client != null && client.isConnect() == true) {
 			client.netSend.up = up;
@@ -179,39 +186,7 @@ public class GameView extends View implements TimerUpdatable {
 			client.send();
 		}
 
-		// Player 1
-		if (up == true) {
-			gorilka1.moveUp();
-		} else if (down == true) {
-			gorilka1.moveDown();
-		} else if (left == true) {
-			gorilka1.moveLeft();
-		} else if (right == true) {
-			gorilka1.moveRight();
-		}
-
-		if (fire == true) {
-			gorilka1.fire();
-			client.netSend.fire = true;
-		}
-
-		// Player 2
-		if (upB == true)
-			gorilka2.moveUp();
-		else if (downB == true)
-			gorilka2.moveDown();
-		else if (leftB == true)
-			gorilka2.moveLeft();
-		else if (rightB == true)
-			gorilka2.moveRight();
-
-		if (fireB == true)
-			gorilka2.fire();
-
-		for (Koule ball : balls) {
-			ball.update();
-		}
-
+	
 		if (gameTime % 50 == 0 && client.isConnect() == false) {
 			client.connect();
 		}
@@ -300,28 +275,10 @@ public class GameView extends View implements TimerUpdatable {
 			} else
 
 			if (buttonFireA.isInside(x, y)) {
-				gorilka1.fire();
+				fire = true;
 			}
 
-			if (buttonUpB.isInside(x, y)) {
-				upB = true;
-			}
-
-			if (buttonDownB.isInside(x, y)) {
-				downB = true;
-			}
-
-			if (buttonLeftB.isInside(x, y)) {
-				leftB = true;
-			}
-
-			if (buttonRightB.isInside(x, y)) {
-				rightB = true;
-			} else
-
-			if (buttonFireB.isInside(x, y)) {
-				gorilka2.fire();
-			}
+			
 		}
 
 		return true;

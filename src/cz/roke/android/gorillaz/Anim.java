@@ -40,4 +40,14 @@ public class Anim {
 		canvas.drawBitmap(bitmap, src, dst, paint);
 	}
 
+	@Override
+	public String toString() {
+		return "Anim [animCount=" + animCount + ", animDelay=" + animDelay
+				+ ", animSize=" + animSize + ", animType=" + animType
+				+ ", animFrame=" + animFrame + ", animProgress=" + animProgress
+				+ "]";
+	}
+	
+	
+
 }

@@ -12,7 +12,7 @@ public class Client {
 	public Gorilka gorilka;
 	
 	public Client(SocketChannel channel) {
-		gorilka = new Gorilka(50, 50);
+		gorilka = new Gorilka(100, 100);
 		
 		this.channel = channel;
 		this.buffer = new StringBuffer();

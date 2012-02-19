@@ -15,7 +15,7 @@ public class Koule extends GameObject {
 
 	private int move;
 
-	private Bitmap obrazek;
+	private static Bitmap obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech_animation);
 
 	private Gorilka vlastnik;
 
@@ -32,7 +32,6 @@ public class Koule extends GameObject {
 
 		float density = GameView.context.getResources().getDisplayMetrics().density;
 		anim = new Anim(6, 1, (int) (40 * density));
-		obrazek = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.orech_animation);
 
 		nabita = false;
 		vystrelena = false;
@@ -107,16 +106,7 @@ public class Koule extends GameObject {
 			}
 		}
 
-		for (int i = 0; i < GameView.gorilkaArray.length; i++) {
-			if (this.vystrelena == true && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i] != vlastnik) {
-				zastavSe();
-				GameView.gorilkaArray[i].respawn();
-			}
-
-			if (this.vystrelena == false && this.nabita == false && this.isCollision(GameView.gorilkaArray[i]) && GameView.gorilkaArray[i].nabitaKoule == null) {
-				GameView.gorilkaArray[i].vemKouli(this);
-			}
-		}
+	
 
 	}
 

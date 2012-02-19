@@ -21,15 +21,15 @@ public class Gorilka extends GameObject {
 
 	public int due;
 
-	public Bitmap picUp;
-	public Bitmap picDown;
-	public Bitmap picLeft;
-	public Bitmap picRight;
+	public static Bitmap picUp = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up);
+	public static Bitmap picDown = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down);
+	public static Bitmap picLeft = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left);
+	public static Bitmap picRight = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right);
 
-	public Bitmap picUpFull;
-	public Bitmap picDownFull;
-	public Bitmap picLeftFull;
-	public Bitmap picRightFull;
+	public static Bitmap picUpFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up_full);
+	public static Bitmap picDownFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down_full);
+	public static Bitmap picLeftFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left_full);
+	public static Bitmap picRightFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right_full);
 
 	public Bitmap actualPic;
 
@@ -38,7 +38,8 @@ public class Gorilka extends GameObject {
 	public Koule nabitaKoule = null;
 
 	private Anim anim;
-	private Bitmap animBitmap, animBitmapFull;
+	private static Bitmap animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
+	private static Bitmap animBitmapFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_straight_animation);
 
 	public Gorilka(int x, int y) {
 		setX(x);
@@ -53,18 +54,8 @@ public class Gorilka extends GameObject {
 
 		float density = GameView.context.getResources().getDisplayMetrics().density;
 		anim = new Anim(3, 5, (int) (40 * density));
-		animBitmap = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_animation);
-		animBitmapFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.gorillaz_straight_animation);
 
-		picUp = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up);
-		picDown = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down);
-		picLeft = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left);
-		picRight = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right);
-
-		picUpFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.up_full);
-		picDownFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.down_full);
-		picLeftFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.left_full);
-		picRightFull = BitmapFactory.decodeResource(GameView.context.getResources(), R.drawable.right_full);
+		
 
 		actualPic = picRight;
 	}
@@ -152,6 +143,8 @@ public class Gorilka extends GameObject {
 		} else {
 			anim.draw(canvas, animBitmapFull, x, y, paint);
 		}
+		
+		Log.i("", "anim frame: " + anim);
 
 		fireTime++;
 		if (fireTime >= RELOAD_TIME) {

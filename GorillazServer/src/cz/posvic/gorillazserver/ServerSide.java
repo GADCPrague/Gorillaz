@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 public class ServerSide extends Communication implements Runnable {
 
 	public static void main(String[] args) {
-		ServerSide ss = new ServerSide(27000);
+		ServerSide ss = new ServerSide(26000);
 		ss.exec();
 	}
 
@@ -106,17 +106,19 @@ public class ServerSide extends Communication implements Runnable {
 		acceptUser(clientChannel);
 	}
 
-	private void readMessage() throws IOException {
+	private void readMessage()  {
 		Iterator<Client> i = clients.iterator();
 		while (i.hasNext()) {
 			Client user = i.next();
 			SocketChannel channel = user.getChannel();
 			StringBuffer sb = user.getBuffer();
 
+			try {
 			ArrayList<String> messages = read(channel, sb);
 			if (messages != null) {
 				for (String mm : messages) {
 					if (readMessage(user, mm)) {
+						odeberGorilku(user.gorilka);
 						userQuit(user);
 						channel.close();
 						i.remove();
@@ -125,7 +127,13 @@ public class ServerSide extends Communication implements Runnable {
 			} else
 
 			{
+				odeberGorilku(user.gorilka);
 				channel.close();
+				i.remove();
+			}
+			
+			} catch (Exception e) {
+				odeberGorilku(user.gorilka);
 				i.remove();
 			}
 		}
@@ -154,7 +162,9 @@ public class ServerSide extends Communication implements Runnable {
 
 	public void acceptUser(SocketChannel channel) {
 		System.out.println("pridavam klienta");
-		clients.add(new Client(channel));
+		Client client = new Client(channel);
+		clients.add(client);
+		pridejGorilku(client.gorilka);
 	}
 
 	public boolean readMessage(Client client, String message) {
@@ -179,6 +189,10 @@ public class ServerSide extends Communication implements Runnable {
 
 	public void update() {
 
+		
+	//	System.out.println("gorilky: " + gorilky.size());
+	//	System.out.println("koule: " + balls.size());
+		
 		for (Koule ball : balls) {
 			ball.update();
 		}
@@ -194,6 +208,8 @@ public class ServerSide extends Communication implements Runnable {
 		packet.koule = balls;
 
 		String packetText = gson.toJson(packet);
+		
+		System.out.println("" + packetText);
 		
 		try {
 			prepareWriteBuffer(packetText);
