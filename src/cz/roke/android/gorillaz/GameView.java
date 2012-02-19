@@ -71,9 +71,6 @@ public class GameView extends View implements TimerUpdatable {
 		}
 	}
 
-	// TODO Oblasti pro joystick
-	private final int SI = 40;
-
 	/*
 	 * Inicialize game.
 	 */
@@ -81,7 +78,8 @@ public class GameView extends View implements TimerUpdatable {
 		Log.d(TAG, "init");
 
 		float density = GameView.context.getResources().getDisplayMetrics().density;
-		
+		int SI = (int) (40 * density);
+
 		// Create areas for joystick
 		buttonUpA = new GameObject(SI, height2 - SI * 3, SI, SI);
 		buttonDownA = new GameObject(SI, height2 - SI, SI, SI);
@@ -151,7 +149,7 @@ public class GameView extends View implements TimerUpdatable {
 		buttonRightB.draw(canvas, p);
 		buttonFireB.draw(canvas, p);
 
-		if (logoTime < 100 ) {
+		if (logoTime < 100) {
 			// TODO canvas.drawBitmap(logo, 0, 0, p);
 		}
 	}
