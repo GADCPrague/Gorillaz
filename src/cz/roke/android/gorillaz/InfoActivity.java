@@ -17,7 +17,7 @@ public class InfoActivity extends Activity {
 		RelativeLayout l = (RelativeLayout) findViewById(R.id.layout);
 		switch (getIntent().getExtras().getInt("type")) {
 			case 1:
-				l.setBackgroundResource(R.drawable.menu_help);
+				l.setBackgroundResource(R.drawable.menu_help_screen);
 				break;
 
 			case 2:
