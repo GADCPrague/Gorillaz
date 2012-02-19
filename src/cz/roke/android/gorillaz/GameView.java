@@ -169,12 +169,7 @@ public class GameView extends View implements TimerUpdatable {
 		gameTime++;
 		Log.i("", "timer2");
 		
-		try {
-			client.update();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		if (client != null && client.isConnect() == true) {
 			client.netSend.up = up;
