@@ -1,5 +1,7 @@
 package cz.roke.android.gorillaz;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,11 +28,23 @@ public class GorillazActivity extends Activity {
 
 		debugStartGame();
 	}
-
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		Log.i("", "key down :" + keyCode);
 
+		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0)
+		{
+			try {
+				gameView.client.getChannel().close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			Log.d(TAG, "Konec");
+			//return false;
+		}
+		
 		if (keyCode == UP)
 			gameView.up = true;
 		else if (keyCode == DOWN)
